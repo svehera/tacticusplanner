@@ -1,0 +1,1167 @@
+{
+    "calendar": "calendar_seasonal_event_december_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Litany of Ignition",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:125", "stamina:900", "raidTicket:150", "gems:250"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:250", "heroAscensionOrbMythic_Imperial:20"]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:250",
+                        "heroAscensionOrbLegendary_Imperial:40",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "heroAscensionOrbRare_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:250",
+                        "heroAscensionOrbLegendary_Imperial:20",
+                        "heroAscensionOrbEpic_Imperial:40",
+                        "heroAscensionOrbRare_Imperial:40"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:125",
+                        "heroAscensionOrbEpic_Imperial:25",
+                        "heroAscensionOrbRare_Imperial:50",
+                        "heroAscensionOrbUncommon_Imperial:25"
+                    ]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Litany of Ignition",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["seasonalEventCurrencyDecember2026:75", "stamina:540", "raidTicket:90", "gems:150"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:175", "heroAscensionOrbMythic_Imperial:14"]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:175",
+                        "heroAscensionOrbLegendary_Imperial:28",
+                        "heroAscensionOrbEpic_Imperial:7",
+                        "heroAscensionOrbRare_Imperial:3"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:175",
+                        "heroAscensionOrbLegendary_Imperial:14",
+                        "heroAscensionOrbEpic_Imperial:28",
+                        "heroAscensionOrbRare_Imperial:28"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:100",
+                        "heroAscensionOrbEpic_Imperial:20",
+                        "heroAscensionOrbRare_Imperial:40",
+                        "heroAscensionOrbUncommon_Imperial:20"
+                    ]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Litany of Ignition",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["seasonalEventCurrencyDecember2026:50", "stamina:360", "raidTicket:60", "gems:100"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:125", "heroAscensionOrbMythic_Imperial:10"]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:125",
+                        "heroAscensionOrbLegendary_Imperial:20",
+                        "heroAscensionOrbEpic_Imperial:5",
+                        "heroAscensionOrbRare_Imperial:2"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:125",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "heroAscensionOrbEpic_Imperial:20",
+                        "heroAscensionOrbRare_Imperial:20"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "heroAscensionOrbEpic_Imperial:15",
+                        "heroAscensionOrbRare_Imperial:30",
+                        "heroAscensionOrbUncommon_Imperial:15"
+                    ]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Litany of Ignition",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["seasonalEventCurrencyDecember2026:25", "stamina:180", "raidTicket:30", "gems:50"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:75", "heroAscensionOrbMythic_Imperial:6"]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "heroAscensionOrbLegendary_Imperial:12",
+                        "heroAscensionOrbEpic_Imperial:3",
+                        "heroAscensionOrbRare_Imperial:1"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "heroAscensionOrbLegendary_Imperial:6",
+                        "heroAscensionOrbEpic_Imperial:12",
+                        "heroAscensionOrbRare_Imperial:12"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Litany of Ascension",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "heroAscensionOrbRare_Imperial:15",
+                        "heroAscensionOrbUncommon_Imperial:15"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Machine God's Blessings",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyDecember2026:10", "specialSummoningToken:1"]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:275",
+                        "itemsMythic_I_Crit:1",
+                        "itemsMythic_I_Booster_Crit:1",
+                        "itemsMythic_I_Block:1",
+                        "itemsMythic_I_Booster_Block:1",
+                        "itemsMythic_I_Defensive:1",
+                        "mythicDust:250",
+                        "gold:250000"
+                    ]
+                },
+                {
+                    "variant": "M1_L_SHD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:275",
+                        "dust:4000",
+                        "gold:60000",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsEpic:3",
+                        "itemsEpic:2",
+                        "itemsEpic:3",
+                        "itemsEpic:2"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_SHD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:220",
+                        "dust:3000",
+                        "gold:30000",
+                        "itemsEpic:4",
+                        "itemsEpic:4",
+                        "itemsRare:4",
+                        "itemsRare:4",
+                        "itemsUncommon:4",
+                        "itemsUncommon:4",
+                        "itemsCommon:4",
+                        "itemsCommon:4"
+                    ]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:165",
+                        "itemsMythic_I_Crit:1",
+                        "itemsMythic_I_Booster_Crit:1",
+                        "itemsMythic_I_Block:1",
+                        "mythicDust:150",
+                        "gold:150000"
+                    ]
+                },
+                {
+                    "variant": "M1_L_HD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:165",
+                        "dust:2400",
+                        "gold:36000",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_HD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:165",
+                        "dust:2250",
+                        "gold:22500",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3"
+                    ]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:110",
+                        "itemsMythic_I_Crit:1",
+                        "itemsMythic_I_Booster_Crit:1",
+                        "mythicDust:100",
+                        "gold:100000"
+                    ]
+                },
+                {
+                    "variant": "M1_L_MD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:110",
+                        "dust:1600",
+                        "gold:24000",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_MD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:110",
+                        "dust:1500",
+                        "gold:15000",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "itemsCommon:2",
+                        "itemsCommon:2"
+                    ]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:55",
+                        "itemsMythic_I_Crit:1",
+                        "mythicDust:50",
+                        "gold:50000"
+                    ]
+                },
+                {
+                    "variant": "M1_L_LD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:55",
+                        "dust:800",
+                        "gold:12000",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "itemsEpic:1"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_LD",
+                    "title": "Canticles for the Cogitator",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:55",
+                        "dust:750",
+                        "gold:7500",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsCommon:2"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:150", "summoningToken:25"]
+                },
+                {
+                    "variant": "XL1_M_SHD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:700",
+                        "abilityTokenMythic_Imperial:12",
+                        "abilityTokenLegendary_Imperial:12",
+                        "gold:2000000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_SHD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:700",
+                        "abilityTokenLegendary_Imperial:24",
+                        "abilityTokenEpic_Imperial:24",
+                        "abilityTokenRare_Imperial:36",
+                        "gold:800000"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyDecember2026:150", "summoningToken:25"]
+                },
+                {
+                    "variant": "XL1_M_HD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:525",
+                        "abilityTokenMythic_Imperial:9",
+                        "abilityTokenLegendary_Imperial:9",
+                        "gold:1500000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_HD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:525",
+                        "abilityTokenLegendary_Imperial:18",
+                        "abilityTokenEpic_Imperial:18",
+                        "abilityTokenRare_Imperial:27",
+                        "gold:600000"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyDecember2026:60", "summoningToken:10"]
+                },
+                {
+                    "variant": "XL1_M_MD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:350",
+                        "abilityTokenMythic_Imperial:6",
+                        "abilityTokenLegendary_Imperial:6",
+                        "gold:1000000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_MD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:350",
+                        "abilityTokenLegendary_Imperial:12",
+                        "abilityTokenEpic_Imperial:12",
+                        "abilityTokenRare_Imperial:18",
+                        "gold:400000"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyDecember2026:30", "summoningToken:5"]
+                },
+                {
+                    "variant": "XL1_M_LD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:175",
+                        "abilityTokenMythic_Imperial:3",
+                        "abilityTokenLegendary_Imperial:3",
+                        "gold:500000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_LD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:175",
+                        "abilityTokenLegendary_Imperial:6",
+                        "abilityTokenEpic_Imperial:6",
+                        "abilityTokenRare_Imperial:9",
+                        "gold:200000"
+                    ]
+                },
+                {
+                    "variant": "XL1_CURE_LD",
+                    "title": "Litany of Engine Evocation",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:175",
+                        "abilityTokenEpic_Imperial:6",
+                        "abilityTokenRare_Imperial:9",
+                        "abilityTokenUncommon_Imperial:12",
+                        "abilityTokenCommon_Imperial:24",
+                        "gold:30000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "XS4_SHD",
+                    "title": "Omnissiah Deliver Us",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "ShardsIfUnlocked:75",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:25"
+                    ]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:240",
+                        "upgradesMythic:12",
+                        "upgradesLegendary:12",
+                        "upgradesEpic:12",
+                        "gold:34380"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_SHD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:240",
+                        "upgradesLegendary:12",
+                        "upgradesLegendary:12",
+                        "upgradesEpic:12",
+                        "upgradesEpic:12",
+                        "upgradesRare:18",
+                        "upgradesRare:18",
+                        "upgradesUncommon:18",
+                        "upgradesUncommon:18",
+                        "upgradesCommon:18",
+                        "upgradesCommon:18",
+                        "gold:24720"
+                    ]
+                },
+                {
+                    "variant": "XS4_HD",
+                    "title": "Omnissiah Deliver Us",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:60",
+                        "ShardsIfUnlocked:60",
+                        "ShardsIfUnlocked:40",
+                        "ShardsIfUnlocked:20"
+                    ]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:160",
+                        "upgradesMythic:8",
+                        "upgradesLegendary:8",
+                        "upgradesEpic:8",
+                        "gold:22920"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_HD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:160",
+                        "upgradesLegendary:8",
+                        "upgradesLegendary:8",
+                        "upgradesEpic:8",
+                        "upgradesEpic:8",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesUncommon:12",
+                        "upgradesUncommon:12",
+                        "upgradesCommon:12",
+                        "upgradesCommon:12",
+                        "gold:16480"
+                    ]
+                },
+                {
+                    "variant": "XS4_MD",
+                    "title": "Omnissiah Deliver Us",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:30",
+                        "ShardsIfUnlocked:30",
+                        "ShardsIfUnlocked:20",
+                        "ShardsIfUnlocked:10"
+                    ]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:140",
+                        "upgradesMythic:7",
+                        "upgradesLegendary:7",
+                        "upgradesEpic:7",
+                        "gold:20055"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_MD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:140",
+                        "upgradesLegendary:14",
+                        "upgradesEpic:14",
+                        "upgradesRare:21",
+                        "upgradesUncommon:21",
+                        "upgradesCommon:21",
+                        "gold:14420"
+                    ]
+                },
+                {
+                    "variant": "XS4_LD",
+                    "title": "Omnissiah Deliver Us",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:15",
+                        "ShardsIfUnlocked:15",
+                        "ShardsIfUnlocked:10",
+                        "ShardsIfUnlocked:5"
+                    ]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:60",
+                        "upgradesMythic:3",
+                        "upgradesLegendary:3",
+                        "upgradesEpic:3",
+                        "gold:8595"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "No Strength in Flesh",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:60",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:6",
+                        "upgradesRare:9",
+                        "upgradesUncommon:9",
+                        "upgradesCommon:9",
+                        "gold:6180"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "M4_SHD",
+                    "title": "The Spark of Life",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:160", "specialSummoningToken:20"]
+                },
+                {
+                    "variant": "L4_M_SHD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:180",
+                        "summoningToken:10",
+                        "gems:1000",
+                        "heroAscensionOrbMythic_Imperial:10",
+                        "xpMythic:6",
+                        "upgHpL134C:1",
+                        "upgDmgL134C:1",
+                        "upgArmL134C:1",
+                        "upgHpL114:10"
+                    ]
+                },
+                {
+                    "variant": "L4_L_SHD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:180",
+                        "summoningToken:20",
+                        "gems:400",
+                        "heroAscensionOrbLegendary_Imperial:20",
+                        "xpMythic:6",
+                        "upgHpL134C:1",
+                        "upgDmgL134C:1",
+                        "upgArmL134C:1"
+                    ]
+                },
+                {
+                    "variant": "M4_HD",
+                    "title": "The Spark of Life",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:120", "specialSummoningToken:15"]
+                },
+                {
+                    "variant": "L4_M_HD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:150",
+                        "summoningToken:10",
+                        "gems:250",
+                        "heroAscensionOrbMythic_Imperial:10",
+                        "xpLegendary:8",
+                        "upgHpL134C:1",
+                        "upgDmgL134C:1",
+                        "upgArmL134C:1",
+                        "upgHpL114:5"
+                    ]
+                },
+                {
+                    "variant": "L4_L_HD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:150",
+                        "summoningToken:10",
+                        "gems:400",
+                        "heroAscensionOrbLegendary_Imperial:20",
+                        "xpLegendary:15",
+                        "upgHpL134C:1",
+                        "upgDmgL134C:1",
+                        "upgArmL134C:1",
+                        "upgHpL114:5"
+                    ]
+                },
+                {
+                    "variant": "M4_MD",
+                    "title": "The Spark of Life",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:80", "specialSummoningToken:10"]
+                },
+                {
+                    "variant": "L4_M_MD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:120",
+                        "summoningToken:8",
+                        "gems:250",
+                        "heroAscensionOrbMythic_Imperial:8",
+                        "xpLegendary:6",
+                        "upgHpL034C:2",
+                        "upgDmgL034C:2",
+                        "upgArmL034C:2",
+                        "upgHpL114:5"
+                    ]
+                },
+                {
+                    "variant": "L4_L_MD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:120",
+                        "summoningToken:8",
+                        "gems:400",
+                        "heroAscensionOrbLegendary_Imperial:15",
+                        "xpLegendary:10",
+                        "upgHpL034C:2",
+                        "upgDmgL034C:2",
+                        "upgArmL034C:2",
+                        "upgHpL114:10"
+                    ]
+                },
+                {
+                    "variant": "M4_LD",
+                    "title": "The Spark of Life",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:40", "specialSummoningToken:5"]
+                },
+                {
+                    "variant": "L4_M_LD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "summoningToken:5",
+                        "gems:250",
+                        "heroAscensionOrbMythic_Imperial:5",
+                        "xpLegendary:5",
+                        "upgHpL034C:1",
+                        "upgDmgL034C:1",
+                        "upgArmL034C:1",
+                        "upgHpL114:5"
+                    ]
+                },
+                {
+                    "variant": "L4_L_LD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "summoningToken:5",
+                        "gems:250",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "xpLegendary:10",
+                        "upgHpL034C:1",
+                        "upgDmgL034C:1",
+                        "upgArmL034C:1",
+                        "upgHpL114:5"
+                    ]
+                },
+                {
+                    "variant": "L4_CURE_LD",
+                    "title": "Flesh is Weak",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:75",
+                        "summoningToken:10",
+                        "gems:250",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "heroAscensionOrbRare_Imperial:10",
+                        "heroAscensionOrbUncommon_Imperial:10",
+                        "xpLegendary:10",
+                        "upgradesRare:9",
+                        "upgradesUncommon:9",
+                        "upgradesCommon:9"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Machine God's Blessings",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyDecember2026:10", "gems:50"]
+                },
+                {
+                    "variant": "L1_SHD",
+                    "title": "Appease the Machine Spirit",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:700",
+                        "specialSummoningToken:10",
+                        "summoningToken:10",
+                        "gems:500"
+                    ]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Appease the Machine Spirit",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:420",
+                        "specialSummoningToken:6",
+                        "summoningToken:6",
+                        "gems:300"
+                    ]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Appease the Machine Spirit",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:210",
+                        "specialSummoningToken:3",
+                        "summoningToken:3",
+                        "gems:150"
+                    ]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Appease the Machine Spirit",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:70",
+                        "specialSummoningToken:1",
+                        "summoningToken:1",
+                        "gems:50"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Motive Force",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyDecember2026:125", "stamina:1800", "raidTicket:300"]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Lingua-Technis Logs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:235",
+                        "xpMythic:9",
+                        "xpLegendary:8",
+                        "xpEpic:5",
+                        "gold:22750"
+                    ]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Motive Force",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyDecember2026:90", "stamina:1260", "raidTicket:210"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Lingua-Technis Logs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:125",
+                        "xpMythic:4",
+                        "xpLegendary:7",
+                        "xpEpic:9",
+                        "gold:12850"
+                    ]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Motive Force",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["seasonalEventCurrencyDecember2026:50", "stamina:720", "raidTicket:120"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Lingua-Technis Logs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:110",
+                        "xpMythic:3",
+                        "xpLegendary:8",
+                        "xpEpic:11",
+                        "gold:11650"
+                    ]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Motive Force",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["seasonalEventCurrencyDecember2026:25", "stamina:360", "raidTicket:60"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Lingua-Technis Logs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:55",
+                        "xpMythic:1",
+                        "xpLegendary:6",
+                        "xpEpic:8",
+                        "gold:6200"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Lingua-Technis Logs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyDecember2026:55",
+                        "xpLegendary:7",
+                        "xpEpic:23",
+                        "xpRare:25",
+                        "gold:8200"
+                    ]
+                }
+            ]
+        }
+    ]
+}

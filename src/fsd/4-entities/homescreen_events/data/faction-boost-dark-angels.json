@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_faction_boost_dark_angels_tier_high_bundle",
                     "offer_homescreen_event_faction_boost_dark_angels_tier_high_playmore",
@@ -258,7 +264,7 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         },
@@ -283,6 +289,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_faction_boost_dark_angels_tier_mid_bundle",
                     "offer_homescreen_event_faction_boost_dark_angels_tier_mid_playmore",
@@ -519,7 +531,7 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         },
@@ -544,6 +556,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_faction_boost_dark_angels_tier_low_bundle",
                     "offer_homescreen_event_faction_boost_dark_angels_tier_low_playmore",
@@ -780,7 +798,7 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         }

@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "trackers": [
                     {
                         "type": "killUnits",
@@ -69,7 +75,7 @@
             "descriptions": [
                 "<i>Operation Imperator</i> is here",
                 "Global event: all players contribute to it together!",
-                "<style=\"HSE_Points_11thEdition_global_BloodAngels\">+{[POINTS]} Operation Imperator points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by a <style=\"Faction_BloodAngels\">Blood Angel</style> in Onslaught."
+                "<style=\"HSE_Points_11thEdition_global_BloodAngels\">+{[POINTS]} Operation Imperator points</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> defeated by a <style=\"Faction_BloodAngels\">Blood Angel</style> in Onslaught."
             ]
         }
     }

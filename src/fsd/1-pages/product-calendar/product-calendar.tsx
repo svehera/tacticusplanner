@@ -17,6 +17,7 @@ import {
     calendarRewardInfo,
     isBlackstonePricedCalendar,
     offersForDayByTitle,
+    summarizeFreeRewards,
     titlesInOrder,
     type CalendarRewardIcon,
 } from './product-calendar.models';
@@ -148,16 +149,14 @@ interface OfferCardProps {
     title: string;
     banner: string;
     offers: IProductCalendarOffer[];
-    selectedVariant: string | undefined;
-    onSelect: (variant: string | undefined) => void;
+    /** Prefix that makes an offer's open-state key unique across calendars, days and offer titles. */
+    keyPrefix: string;
+    openOffers: ReadonlySet<string>;
+    onToggle: (offerKey: string) => void;
     priceInBlackstone: boolean;
 }
 
-function OfferCard({ title, banner, offers, selectedVariant, onSelect, priceInBlackstone }: OfferCardProps) {
-    function handleClick(variant: string) {
-        onSelect(selectedVariant === variant ? undefined : variant);
-    }
-
+function OfferCard({ title, banner, offers, keyPrefix, openOffers, onToggle, priceInBlackstone }: OfferCardProps) {
     return (
         <div className="flex max-w-[220px] min-w-[180px] shrink-0 flex-col overflow-hidden rounded-lg border border-(--card-border) bg-(--bg)">
             <div className="bg-(--primary) px-3 py-1.5 text-(--primary-fg)">
@@ -167,13 +166,14 @@ function OfferCard({ title, banner, offers, selectedVariant, onSelect, priceInBl
 
             <div className="flex flex-col divide-y divide-(--border)">
                 {offers.map(offer => {
-                    const isSelected = selectedVariant === offer.variant;
+                    const offerKey = `${keyPrefix}|${offer.variant}`;
+                    const isSelected = openOffers.has(offerKey);
                     return (
                         <div key={offer.variant}>
                             <Button
                                 appearance="unstyled"
                                 size="unstyled"
-                                onPress={() => handleClick(offer.variant)}
+                                onPress={() => onToggle(offerKey)}
                                 className={[
                                     'flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left transition-colors',
                                     'hover:bg-(--primary)/10',
@@ -213,21 +213,22 @@ function OfferCard({ title, banner, offers, selectedVariant, onSelect, priceInBl
 interface DaySectionProps {
     calDay: IProductCalendar['days'][number];
     allTitles: string[];
-    selectedVariant: string | undefined;
-    onSelect: (variant: string | undefined) => void;
+    calendarId: string;
+    openOffers: ReadonlySet<string>;
+    onToggle: (offerKey: string) => void;
     priceInBlackstone: boolean;
 }
 
-function DaySection({ calDay, allTitles, selectedVariant, onSelect, priceInBlackstone }: DaySectionProps) {
+function DaySection({ calDay, allTitles, calendarId, openOffers, onToggle, priceInBlackstone }: DaySectionProps) {
     const byTitle = offersForDayByTitle(calDay);
 
     return (
-        <Accordion>
+        <Accordion className="w-fit max-w-full min-w-40">
             <AccordionHeader>
                 <span className="font-semibold text-(--fg)">Day {calDay.day}</span>
             </AccordionHeader>
-            <AccordionBody className="overflow-x-auto p-3">
-                <div className="flex gap-3 pb-1">
+            <AccordionBody className="p-3">
+                <div className="flex flex-wrap gap-3">
                     {allTitles.map(title => {
                         const offers = byTitle.get(title);
                         if (!offers) return;
@@ -237,8 +238,9 @@ function DaySection({ calDay, allTitles, selectedVariant, onSelect, priceInBlack
                                 title={title}
                                 banner={offers[0]?.banner ?? ''}
                                 offers={offers}
-                                selectedVariant={selectedVariant}
-                                onSelect={onSelect}
+                                keyPrefix={`${calendarId}|${calDay.day}|${title}`}
+                                openOffers={openOffers}
+                                onToggle={onToggle}
                                 priceInBlackstone={priceInBlackstone}
                             />
                         );
@@ -249,13 +251,35 @@ function DaySection({ calDay, allTitles, selectedVariant, onSelect, priceInBlack
     );
 }
 
-interface CalendarSectionProps {
-    calendar: IProductCalendar;
-    selectedVariant: string | undefined;
-    onSelect: (variant: string | undefined) => void;
+function FreeStuffSummary({ calendar }: { calendar: IProductCalendar }) {
+    const { totals, daysWithAlternatives } = summarizeFreeRewards(calendar);
+    if (totals.length === 0) return;
+
+    return (
+        <div className="rounded-lg border border-(--card-border) bg-(--bg) p-3">
+            <div className="mb-2 text-sm font-bold text-(--fg)">Free Stuff:</div>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-4">
+                {totals.map(({ type, qty }) => (
+                    <RewardRow key={type} reward={`${type}:${qty}`} />
+                ))}
+            </div>
+            {daysWithAlternatives > 0 && (
+                <p className="mt-2 text-xs text-(--soft-fg)">
+                    {daysWithAlternatives} {daysWithAlternatives === 1 ? 'day has' : 'days have'} alternative free
+                    offers, since the offer you see is targeted; only the first of each is counted.
+                </p>
+            )}
+        </div>
+    );
 }
 
-function CalendarSection({ calendar, selectedVariant, onSelect }: CalendarSectionProps) {
+interface CalendarSectionProps {
+    calendar: IProductCalendar;
+    openOffers: ReadonlySet<string>;
+    onToggle: (offerKey: string) => void;
+}
+
+function CalendarSection({ calendar, openOffers, onToggle }: CalendarSectionProps) {
     const allTitles = titlesInOrder(calendar);
     const displayName = calendarDisplayName(calendar.calendar);
     const priceInBlackstone = isBlackstonePricedCalendar(calendar.calendar);
@@ -270,24 +294,35 @@ function CalendarSection({ calendar, selectedVariant, onSelect }: CalendarSectio
                     </div>
                 </div>
             </AccordionHeader>
-            <AccordionBody className="space-y-2 p-3">
-                {calendar.days.map(calDay => (
-                    <DaySection
-                        key={calDay.day}
-                        calDay={calDay}
-                        allTitles={allTitles}
-                        selectedVariant={selectedVariant}
-                        onSelect={onSelect}
-                        priceInBlackstone={priceInBlackstone}
-                    />
-                ))}
+            <AccordionBody className="space-y-3 p-3">
+                <FreeStuffSummary calendar={calendar} />
+                <div className="flex flex-wrap items-start gap-2">
+                    {calendar.days.map(calDay => (
+                        <DaySection
+                            key={calDay.day}
+                            calDay={calDay}
+                            allTitles={allTitles}
+                            calendarId={calendar.calendar}
+                            openOffers={openOffers}
+                            onToggle={onToggle}
+                            priceInBlackstone={priceInBlackstone}
+                        />
+                    ))}
+                </div>
             </AccordionBody>
         </Accordion>
     );
 }
 
 export function ProductCalendar() {
-    const [selectedVariant, setSelectedVariant] = useState<string | undefined>();
+    // Opening an offer never closes another one; each is closed only by clicking it again.
+    const [openOffers, setOpenOffers] = useState<ReadonlySet<string>>(new Set());
+    const toggleOffer = (offerKey: string) =>
+        setOpenOffers(current => {
+            const next = new Set(current);
+            if (!next.delete(offerKey)) next.add(offerKey);
+            return next;
+        });
 
     return (
         <div className="space-y-4 py-6">
@@ -300,8 +335,8 @@ export function ProductCalendar() {
                 <CalendarSection
                     key={calendar.calendar}
                     calendar={calendar}
-                    selectedVariant={selectedVariant}
-                    onSelect={setSelectedVariant}
+                    openOffers={openOffers}
+                    onToggle={toggleOffer}
                 />
             ))}
         </div>

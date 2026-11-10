@@ -6,17 +6,25 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { formatPrice } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
+import { Select } from '@/fsd/5-shared/ui/selects';
 import { TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { getHseDisplayName, homescreenEvents, HseIcon, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
+import {
+    getHseDisplayName,
+    homescreenEvents,
+    HseIcon,
+    allHseSchedules,
+    resolveHseTier,
+} from '@/fsd/4-entities/homescreen_events';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { hasBlueStarUnit, PL_MEDIUM } from '@/fsd/4-entities/shops';
 
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 import { resolveHseDescriptionLines } from '@/fsd/3-features/homescreen-events/hse-description-resolver';
 
+import { buildHseOptions, type HseOption } from './hses-lookup.options';
 import {
     hseOfferRewardInfo,
     hseOfferTitle,
@@ -25,9 +33,17 @@ import {
     REWARD_ICON_SIZE,
 } from './hses-lookup.utils';
 
-const sortedEvents = homescreenEvents
-    .map(event => ({ event, displayName: getHseDisplayName(event) }))
-    .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+const hseOptions = buildHseOptions(
+    homescreenEvents.map(event => ({ event, displayName: getHseDisplayName(event) })),
+    allHseSchedules
+);
+const allHseOptions = [...hseOptions.scheduled, ...hseOptions.others];
+const SEPARATOR_VALUE = '---';
+const selectOptions: HseOption[] = [
+    ...hseOptions.scheduled,
+    ...(hseOptions.scheduled.length > 0 ? [{ value: SEPARATOR_VALUE, eventName: '', label: '---' }] : []),
+    ...hseOptions.others,
+];
 
 // TODO(remove after 2026-08-17): temporary Arsenal of War promo banner — delete this const and its usage below.
 const ARSENAL_OF_WAR_PROMO_EXPIRY = new Date('2026-08-17T23:59:00');
@@ -35,7 +51,9 @@ const ARSENAL_OF_WAR_PROMO_EXPIRY = new Date('2026-08-17T23:59:00');
 export const HsesLookup = () => {
     const { characters: unresolvedCharacters, mows, playerMetadata } = useContext(StoreContext);
 
-    const [selectedEventName, setSelectedEventName] = useState(sortedEvents[0]?.event.eventName ?? '');
+    const [selectedOptionValue, setSelectedOptionValue] = useState(allHseOptions[0]?.value ?? '');
+    const selectedOption = allHseOptions.find(option => option.value === selectedOptionValue) ?? allHseOptions[0];
+    const selectedEventName = selectedOption?.eventName;
 
     const pl = playerMetadata.powerLevel ?? 1;
 
@@ -62,20 +80,30 @@ export const HsesLookup = () => {
         <div className="flex flex-col gap-6 p-4">
             <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="hse-select" className="text-sm font-medium text-(--fg)">
-                        Home-Screen Event
-                    </label>
-                    <select
-                        id="hse-select"
-                        value={selectedEventName}
-                        onChange={event_ => setSelectedEventName(event_.currentTarget.value)}
-                        className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-1.5 text-sm text-(--fg)">
-                        {sortedEvents.map(({ event, displayName }) => (
-                            <option key={event.eventName} value={event.eventName}>
-                                {displayName}
-                            </option>
-                        ))}
-                    </select>
+                    <span className="text-sm font-medium text-(--fg)">Home-Screen Event</span>
+                    <Select
+                        ariaLabel="Home-Screen Event"
+                        className="min-w-72"
+                        panelClassName="min-w-80"
+                        options={selectOptions}
+                        value={selectedOption}
+                        by={(a, b) => a.value === b.value}
+                        onChange={option => option.value !== SEPARATOR_VALUE && setSelectedOptionValue(option.value)}
+                        renderOption={option =>
+                            option.value === SEPARATOR_VALUE ? (
+                                <span className="w-full text-center text-(--soft-fg)">---</span>
+                            ) : (
+                                <>
+                                    <HseIcon
+                                        eventName={option.eventName}
+                                        gameModeIcon={option.gameModeIcon}
+                                        className="size-6 shrink-0 text-(--soft-fg)"
+                                    />
+                                    <span className="truncate">{option.label}</span>
+                                </>
+                            )
+                        }
+                    />
                 </div>
 
                 {!isSingleTierEvent && (
@@ -108,7 +136,11 @@ export const HsesLookup = () => {
 
             {selectedEvent && (
                 <div className="flex items-center gap-3">
-                    <HseIcon eventName={selectedEvent.eventName} className="size-8 text-(--soft-fg)" />
+                    <HseIcon
+                        eventName={selectedEvent.eventName}
+                        gameModeIcon={selectedEvent.gameModeIcon}
+                        className="size-8 text-(--soft-fg)"
+                    />
                     <h1 className="text-xl font-bold">{getHseDisplayName(selectedEvent)}</h1>
                 </div>
             )}

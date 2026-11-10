@@ -420,6 +420,47 @@ export const campaignsList: ICampaignModel[] = [
         groupType: CampaignGroupType.darkAngelsCE,
         difficulty: CampaignDifficulty.eventChallenge,
     },
+    // Blood Angels Campaign Events
+    {
+        id: Campaign.BAS,
+        name: 'Blood Angels Standard',
+        displayName: 'Blood Angels Standard',
+        faction: 'BloodAngels',
+        coreCharacters: ['orksNob', 'orksRuntherd', 'orksWeirdboy'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.bloodAngelsCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.BASC,
+        name: 'Blood Angels Standard Challenge',
+        displayName: 'Blood Angels Standard Challenge',
+        faction: 'BloodAngels',
+        coreCharacters: ['orksNob', 'orksRuntherd', 'orksWeirdboy'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.bloodAngelsCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.BAE,
+        name: 'Blood Angels Extremis',
+        displayName: 'Blood Angels Extremis',
+        faction: 'BloodAngels',
+        coreCharacters: ['orksNob', 'orksRuntherd', 'orksWeirdboy'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.bloodAngelsCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.BAEC,
+        name: 'Blood Angels Extremis Challenge',
+        displayName: 'Blood Angels Extremis Challenge',
+        faction: 'BloodAngels',
+        coreCharacters: ['orksNob', 'orksRuntherd', 'orksWeirdboy'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.bloodAngelsCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
 ];
 
 export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>
@@ -433,6 +474,7 @@ const campaignEvents: Set<CampaignGroupType> = new Set([
     CampaignGroupType.deathGuardCE,
     CampaignGroupType.sistersCE,
     CampaignGroupType.darkAngelsCE,
+    CampaignGroupType.bloodAngelsCE,
 ]);
 
 export const campaignEventsLocations: Campaign[] = campaignsList

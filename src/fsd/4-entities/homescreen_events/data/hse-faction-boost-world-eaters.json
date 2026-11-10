@@ -1,0 +1,280 @@
+{
+    "eventName": "hse_faction_boost_world_eaters",
+    "schedule": [
+        {
+            "startDate": "2026-11-23",
+            "endDate": "2026-11-28",
+            "startUtc": "2026-11-23T00:00:00Z",
+            "endUtc": "2026-11-29T00:00:00Z"
+        }
+    ],
+    "gameModeIcon": "ui_gamemodeicon_faction_boost_world_eaters.png",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_faction_boost_world_eaters",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_world_eaters_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_world_eaters",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_world_eaters_Interstitial_Description",
+                "eventId": "hse_faction_boost_world_eaters",
+                "rewardProgressId": "hse_faction_boost_world_eaters",
+                "theme": "faction_boost_world_eaters",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_world_eaters_bundle",
+                    "offer_homescreen_event_faction_boost_world_eaters_playmore",
+                    "offer_homescreen_event_faction_boost_world_eaters_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_world_eaters_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["WorldEaters"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_WorldEaters",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_world_eaters_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_world_eaters_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_world_eaters_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["WorldEaters"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:5"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:5"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:5"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:10"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:10"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:10"
+                },
+                {
+                    "requiredProgress": 350,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:15"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:20"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:25"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:30"
+                },
+                {
+                    "requiredProgress": 625,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:35"
+                },
+                {
+                    "requiredProgress": 725,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:40"
+                },
+                {
+                    "requiredProgress": 850,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:50"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "gold:3000",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:FactionBoost_WorldEaters": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "factionId": "WorldEaters",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_faction_boost_world_eaters_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_world_eaters_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_world_eaters_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_faction_boost_world_eaters:70",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_world_eaters_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_world_eaters_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_world_eaters_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_faction_boost_world_eaters:50",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_world_eaters_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_world_eaters_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_world_eaters_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
+                        "price": 499,
+                        "mercadoId": "offer_00499",
+                        "rewards": ["tieredRewardPoints_hse_faction_boost_world_eaters:80", "gems:500"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Faction Boost: World Eaters</i> is here",
+                "Earn points by battling with the World Eaters and claim exclusive rewards!",
+                "<style=\"FactionIcon_WorldEaters\">World Eaters</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_WorldEaters\">World Eaters</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "Gain <style=\"HSE_Points_FactionBoostWorldEaters\">{[POINTS]} World Eaters points</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Aliance_Chaos\">Chaos</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostWorldEaters\">+{[POINTS]} point</style> when using a <style=\"FactionIcon_WorldEaters\">World Eater</style>."
+            ]
+        }
+    }
+}

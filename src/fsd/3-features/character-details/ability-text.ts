@@ -152,6 +152,17 @@ export function getStyleSpec(styleName: string): StyleSpec | undefined {
         return { color: FACTION_COLORS[factionId] ?? '#ffffff' };
     }
 
+    // ── Faction icon (home-screen events): tint with the faction colour ────────
+    if (styleName.startsWith('FactionIcon_')) {
+        const factionId = styleName.slice('FactionIcon_'.length);
+        return { color: FACTION_COLORS[factionId] ?? '#ffffff' };
+    }
+
+    // ── Home-screen event point currencies ───────────────────────────────────
+    if (styleName.startsWith('HSE_Points_')) {
+        return { color: ABILITY_COLORS.stat };
+    }
+
     // ── Alliance ──────────────────────────────────────────────────────────────
     if (styleName.startsWith('Aliance_')) {
         const alliance = styleName.slice('Aliance_'.length).toLowerCase() as 'chaos' | 'imperial' | 'xenos';
@@ -392,7 +403,11 @@ function parseVariableContent(inner: string): VariableNode {
     return { type: 'var', name: inner };
 }
 
-export function parseAbilityText(text: string): AstNode[] {
+/** Tooltip hyperlink wrappers (`<link=\"tooltip:...\">...</link>`) have no visual effect here; drop the tags and keep the text. */
+const LINK_TAG_RE = /<link=[^>]*>|<\/link>/g;
+
+export function parseAbilityText(rawText: string): AstNode[] {
+    const text = rawText.replaceAll(LINK_TAG_RE, '');
     const stack: AstNode[][] = [[]];
     const styleStack: Array<{ styleName: string; isDynamic: boolean }> = [];
     let lastIndex = 0;

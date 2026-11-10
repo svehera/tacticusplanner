@@ -707,6 +707,12 @@
         "name": "ヌバリ・シャルダー",
         "title": "エラディケイター・サージェント"
     },
+    "lostaFearmonger": {
+        "extraShortName": "ダラス",
+        "shortName": "ダラス",
+        "name": "ダラス・キャロウ",
+        "title": "ネメシス爪のフィアモンガー"
+    },
     "lostaBile": {
         "extraShortName": "ファビウス・バイル",
         "shortName": "ファビウス・バイル",

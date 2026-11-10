@@ -21,6 +21,18 @@ import {
 
 const isString = (v: unknown): v is string => typeof v === 'string';
 
+/** Campaign events whose enemies are NPCs without a playable faction, so no enemy/ally faction warning applies. */
+const NPC_ENEMY_CAMPAIGNS = new Set<Campaign>([
+    Campaign.DAS,
+    Campaign.DASC,
+    Campaign.DAE,
+    Campaign.DAEC,
+    Campaign.BAS,
+    Campaign.BASC,
+    Campaign.BAE,
+    Campaign.BAEC,
+]);
+
 export class CampaignsService {
     public static readonly rawBattleData = battleData;
     public static readonly allCampaigns = campaignsList;
@@ -136,20 +148,14 @@ export class CampaignsService {
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
             enemies.factions = enemies.factions.filter(faction => isString(faction));
             allies.factions = allies.factions.filter(faction => isString(faction));
-            if (
-                enemies.factions.length === 0 &&
-                ![Campaign.DAS, Campaign.DASC, Campaign.DAE, Campaign.DAEC].includes(battle.campaign as Campaign)
-            ) {
+            if (enemies.factions.length === 0 && !NPC_ENEMY_CAMPAIGNS.has(battle.campaign as Campaign)) {
                 console.warn(
                     'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
                     battle
                 );
             }
-            if (
-                allies.factions.length === 0 &&
-                ![Campaign.DAS, Campaign.DASC, Campaign.DAE, Campaign.DAEC].includes(battle.campaign as Campaign)
-            ) {
+            if (allies.factions.length === 0 && !NPC_ENEMY_CAMPAIGNS.has(battle.campaign as Campaign)) {
                 console.warn(
                     'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
@@ -521,6 +527,23 @@ export class CampaignsService {
                     allies: {
                         alliance: Alliance.Xenos,
                         factions: ['Necrons'],
+                    },
+                };
+            }
+            case Campaign.BAS:
+            case Campaign.BASC:
+            case Campaign.BAE:
+            case Campaign.BAEC: {
+                // Blood Angels CE enemies are mostly NPCs, so they are left empty and not filtered.
+                // Only Orks are usable (allies).
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: ['Orks'],
                     },
                 };
             }

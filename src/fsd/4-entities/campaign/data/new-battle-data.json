@@ -33525,7 +33525,7 @@
                 }
             ]
         },
-        "enemyPower": 19146,
+        "enemyPower": 18316,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 11,
@@ -58202,7 +58202,7 @@
                 }
             ]
         },
-        "enemyPower": 252055,
+        "enemyPower": 248020,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 12,
@@ -86620,6 +86620,4787 @@
                 "count": 2,
                 "stars": 13,
                 "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGS01": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 60,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Cadian Guardsman"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:4",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS02": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC011",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 104,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:4",
+                "count": 5
+            },
+            {
+                "id": "astraNpc2Lascannon:4",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS03": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC001",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 257,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:4",
+                "count": 6
+            },
+            {
+                "id": "astraNpc2Lascannon:4",
+                "count": 1
+            },
+            {
+                "id": "astraNpc3Voxcaster:5",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGSC03B": {
+        "campaign": "Blood Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 1084,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Mortar Team", "Cadian Vox-caster", "Kut", "Sibyll"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:6",
+                "count": 4
+            },
+            {
+                "id": "astraNpc3Voxcaster:6",
+                "count": 4
+            },
+            {
+                "id": "astraNpc4Mortar:6",
+                "count": 2
+            },
+            {
+                "id": "astraNpcBullgryn:3",
+                "count": 1
+            },
+            {
+                "id": "astraNpcPrimarisPsy:3",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpcBullgryn",
+                "name": "Kut",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "astraNpcPrimarisPsy",
+                "name": "Sibyll",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS04": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC016",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 290,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:4",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS05": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC001",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 580,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cadian Guardsman", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:6",
+                "count": 6
+            },
+            {
+                "id": "bloodNpc1Intercessor:5",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS06": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodIntercessor",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 927,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels"],
+        "enemiesTotal": 12,
+        "enemiesTypes": [
+            "Cadian Guardsman",
+            "Cadian Lascannon Team",
+            "Cadian Vox-caster",
+            "Jump Pack Intercessor",
+            "Mataneo"
+        ],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:6",
+                "count": 3
+            },
+            {
+                "id": "astraNpc2Lascannon:6",
+                "count": 3
+            },
+            {
+                "id": "astraNpc3Voxcaster:6",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 4
+            },
+            {
+                "id": "bloodNpcIntercessor:3",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 1,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "IGS07": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 918,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 9
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 9,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "IGS08": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC003",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 798,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Inceptor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc1Inceptor:6",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "IGS09": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 748,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Guardsman", "Eliminator", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:7",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc2Eliminator:6",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "IGS10": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR035",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 932,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Eliminator", "Inceptor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc1Inceptor:6",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc2Eliminator:6",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "IGS11": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodDeathCompany",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 1110,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cadian Guardsman", "Eliminator", "Jump Pack Intercessor", "Lucien"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:4",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:6",
+                "count": 5
+            },
+            {
+                "id": "bloodNpcDeathCompany:3",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc2Eliminator:6",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "bloodNpcDeathCompany",
+                "name": "Lucien",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "IGS12": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.929
+                }
+            ]
+        },
+        "enemyPower": 731,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Imperial Crate"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp:7",
+                "count": 1
+            },
+            {
+                "id": "astraNpc1Guardsman:7",
+                "count": 5
+            },
+            {
+                "id": "astraNpc3Voxcaster:7",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp",
+                "name": "Imperial Crate",
+                "count": 1,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "IGS13": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU016",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 979,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "Ultramarines", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Heavy Intercessor", "Imperial Crate", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp:7",
+                "count": 1
+            },
+            {
+                "id": "Debris_OilDrum:8",
+                "count": 1
+            },
+            {
+                "id": "astraNpc1Guardsman:7",
+                "count": 6
+            },
+            {
+                "id": "astraNpc1Guardsman:9",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:8",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp",
+                "name": "Imperial Crate",
+                "count": 1,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 4,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "IGSC13B": {
+        "campaign": "Blood Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpE003",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 6011,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 9,
+        "enemiesTypes": [
+            "Bellator",
+            "Dreir",
+            "Explosive Oil Drum",
+            "Inceptor",
+            "Jump Pack Intercessor",
+            "Mataneo",
+            "Oil Drum"
+        ],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:10",
+                "count": 1
+            },
+            {
+                "id": "Debris_OilDrum:10",
+                "count": 1
+            },
+            {
+                "id": "astraNpcDreir:8",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:10",
+                "count": 2
+            },
+            {
+                "id": "bloodNpcIntercessor:8",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc1Inceptor:10",
+                "count": 2
+            },
+            {
+                "id": "ultraNpcInceptorSgt:9",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 4,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 4,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpcDreir",
+                "name": "Dreir",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpcInceptorSgt",
+                "name": "Bellator",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "IGS14": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU012",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 2442,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Lascannon Team", "Heavy Intercessor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:7",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:8",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:7",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "IGS15": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU001",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 2210,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "Ultramarines", null],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cadian Guardsman", "Heavy Intercessor", "Imperial Crate", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp:9",
+                "count": 1
+            },
+            {
+                "id": "Debris_OilDrum:9",
+                "count": 2
+            },
+            {
+                "id": "astraNpc1Guardsman:9",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:7",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_Crate_Imp",
+                "name": "Imperial Crate",
+                "count": 1,
+                "stars": 5,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 5,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "IGS16": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR035",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 4028,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:9",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc1Inceptor:9",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:8",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 4,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "IGS17": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodSanguinary",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 5636,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Inceptor", "Jump Pack Intercessor", "Nicodemus"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:10",
+                "count": 4
+            },
+            {
+                "id": "bloodNpcSanguinary:8",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc1Inceptor:9",
+                "count": 2
+            },
+            {
+                "id": "ultraNpc2Eliminator:8",
+                "count": 2
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:10",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "bloodNpcSanguinary",
+                "name": "Nicodemus",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 2,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 2,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "IGS18": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU011",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 2864,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Explosive Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:6",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc2Terminator:9",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 4,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "IGS19": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 4224,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc2Terminator:9",
+                "count": 6
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 6,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "IGS20": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU009",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 5762,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Explosive Oil Drum", "Jump Pack Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:14",
+                "count": 1
+            },
+            {
+                "id": "Debris_OilDrum:14",
+                "count": 4
+            },
+            {
+                "id": "bloodNpc1Intercessor:10",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc2Terminator:10",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "IGS21": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR035",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 5764,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Heavy Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:14",
+                "count": 4
+            },
+            {
+                "id": "bloodNpc2Terminator:10",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:9",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "IGS22": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodTerminator",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 7001,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cezare", "Jump Pack Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:14",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc1Intercessor:10",
+                "count": 5
+            },
+            {
+                "id": "bloodNpc2Terminator:11",
+                "count": 2
+            },
+            {
+                "id": "bloodNpcTerminator:8",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpcTerminator",
+                "name": "Cezare",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "IGS23": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU007",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 2832,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:11",
+                "count": 6
+            },
+            {
+                "id": "astraNpc2Lascannon:12",
+                "count": 3
+            },
+            {
+                "id": "astraNpc3Voxcaster:12",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 5,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "IGS24": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU004",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 7614,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": [
+            "Cadian Guardsman",
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Oil Drum"
+        ],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:10",
+                "count": 2
+            },
+            {
+                "id": "astraNpc1Guardsman:14",
+                "count": 4
+            },
+            {
+                "id": "astraNpc2Lascannon:15",
+                "count": 2
+            },
+            {
+                "id": "astraNpc3Voxcaster:14",
+                "count": 2
+            },
+            {
+                "id": "astraNpc4Mortar:15",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 4,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGS25": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.8
+                }
+            ]
+        },
+        "enemyPower": 15487,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["Ultramarines", null],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:8",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc2Eliminator:14",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:14",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 4,
+                "stars": 4,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 3,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "IGSC25B": {
+        "campaign": "Blood Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgE011",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 51605,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cezare", "Dante", "Lucien", "Mataneo", "Mephiston", "Nicodemus", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:12",
+                "count": 5
+            },
+            {
+                "id": "bloodNpcDante:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcDeathCompany:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcIntercessor:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcMephiston:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcSanguinary:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcTerminator:11",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 5,
+                "stars": 4,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "bloodNpcDante",
+                "name": "Dante",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpcDeathCompany",
+                "name": "Lucien",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpcMephiston",
+                "name": "Mephiston",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpcSanguinary",
+                "name": "Nicodemus",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpcTerminator",
+                "name": "Cezare",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "IGS26": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 9978,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", null],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Death Rider", "Explosive Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:10",
+                "count": 1
+            },
+            {
+                "id": "astraNpc5DeathRider:15",
+                "count": 6
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 4,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 6,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGS27": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 18300,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster", "Death Rider"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:16",
+                "count": 2
+            },
+            {
+                "id": "astraNpc2Lascannon:16",
+                "count": 3
+            },
+            {
+                "id": "astraNpc3Voxcaster:16",
+                "count": 3
+            },
+            {
+                "id": "astraNpc5DeathRider:16",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 4,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGS28": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 31295,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Mortar Team", "Death Rider", "Explosive Oil Drum", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:14",
+                "count": 1
+            },
+            {
+                "id": "astraNpc4Mortar:17",
+                "count": 4
+            },
+            {
+                "id": "astraNpc5DeathRider:17",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:17",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "IGS29": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL115",
+                    "chance_numerator": 1,
+                    "chance_denominator": 9,
+                    "effective_rate": 0.2
+                }
+            ]
+        },
+        "enemyPower": 55408,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Death Rider", "Eliminator", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:17",
+                "count": 3
+            },
+            {
+                "id": "astraNpc5DeathRider:17",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc2Terminator:17",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc2Eliminator:16",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGS30": {
+        "campaign": "Blood Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodMephiston",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 54773,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusAstartes", "AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Eliminator", "Jump Pack Intercessor", "Nubari", "Terminator", "Yarrick"],
+        "rawEnemyTypes": [
+            {
+                "id": "astarNpcEradiccator:11",
+                "count": 1
+            },
+            {
+                "id": "astraNpcYarrick:11",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:17",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc2Terminator:17",
+                "count": 2
+            },
+            {
+                "id": "ultraNpc2Eliminator:16",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astarNpcEradiccator",
+                "name": "Nubari",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpcYarrick",
+                "name": "Yarrick",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGE01": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 1662,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Cadian Guardsman"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:16",
+                "count": 6
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "IGE02": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC011",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 4906,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:18",
+                "count": 4
+            },
+            {
+                "id": "astraNpc2Lascannon:18",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "IGE03": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC001",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 24142,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:18",
+                "count": 4
+            },
+            {
+                "id": "astraNpc3Voxcaster:18",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "IGEC03B": {
+        "campaign": "Blood Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmE013",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.429
+                }
+            ]
+        },
+        "enemyPower": 162369,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Mortar Team", "Cadian Vox-caster", "Kut", "Sibyll"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:22",
+                "count": 4
+            },
+            {
+                "id": "astraNpc3Voxcaster:22",
+                "count": 3
+            },
+            {
+                "id": "astraNpc4Mortar:22",
+                "count": 3
+            },
+            {
+                "id": "astraNpcBullgryn:14",
+                "count": 1
+            },
+            {
+                "id": "astraNpcPrimarisPsy:14",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpcBullgryn",
+                "name": "Kut",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "astraNpcPrimarisPsy",
+                "name": "Sibyll",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "IGE04": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC016",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 52825,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:18",
+                "count": 3
+            },
+            {
+                "id": "astraNpc3Voxcaster:20",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc1Intercessor:20",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "IGE05": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC001",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 58484,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:18",
+                "count": 2
+            },
+            {
+                "id": "astraNpc3Voxcaster:20",
+                "count": 4
+            },
+            {
+                "id": "bloodNpc1Intercessor:20",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "IGE06": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodIntercessor",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.643
+                }
+            ]
+        },
+        "enemyPower": 76110,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Inceptor", "Jump Pack Intercessor", "Mataneo"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:18",
+                "count": 2
+            },
+            {
+                "id": "astraNpc2Lascannon:20",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc1Intercessor:20",
+                "count": 3
+            },
+            {
+                "id": "bloodNpcIntercessor:13",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc1Inceptor:20",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "IGE07": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 66916,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:18",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:20",
+                "count": 8
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 8,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "IGE08": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC003",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 80380,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Eliminator", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:20",
+                "count": 5
+            },
+            {
+                "id": "ultraNpc2Eliminator:20",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 5,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "IGE09": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 94648,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["BloodAngels", "Ultramarines"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Eliminator", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor:21",
+                "count": 5
+            },
+            {
+                "id": "ultraNpc2Eliminator:21",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "IGE10": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 113045,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Eliminator", "Inceptor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:22",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:22",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc1Inceptor:22",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc2Eliminator:22",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "IGE11": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodDeathCompany",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.643
+                }
+            ]
+        },
+        "enemyPower": 187279,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Eliminator", "Jump Pack Intercessor", "Lucien"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:22",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:22",
+                "count": 5
+            },
+            {
+                "id": "bloodNpcDeathCompany:14",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc2Eliminator:22",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "bloodNpcDeathCompany",
+                "name": "Lucien",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "IGE12": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU009",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 57058,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:22",
+                "count": 6
+            },
+            {
+                "id": "astraNpc3Voxcaster:22",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "IGE13": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU016",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 185909,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "Ultramarines", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Heavy Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:12",
+                "count": 2
+            },
+            {
+                "id": "astraNpc1Guardsman:24",
+                "count": 4
+            },
+            {
+                "id": "astraNpc3Voxcaster:23",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:22",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 4,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "IGEC13B": {
+        "campaign": "Blood Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmL204",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 2496714,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": [
+            "Bellator",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Dreir",
+            "Inceptor",
+            "Jump Pack Intercessor",
+            "Mataneo",
+            "Oil Drum"
+        ],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:28",
+                "count": 1
+            },
+            {
+                "id": "astraNpc3Voxcaster:33",
+                "count": 1
+            },
+            {
+                "id": "astraNpc4Mortar:33",
+                "count": 3
+            },
+            {
+                "id": "astraNpcDreir:18",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:33",
+                "count": 2
+            },
+            {
+                "id": "bloodNpcIntercessor:18",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc1Inceptor:33",
+                "count": 2
+            },
+            {
+                "id": "ultraNpcInceptorSgt:16",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 10,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpcDreir",
+                "name": "Dreir",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "ultraNpcInceptorSgt",
+                "name": "Bellator",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGE14": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU012",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 388283,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Explosive Oil Drum", "Heavy Intercessor", "Jump Pack Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:20",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:26",
+                "count": 5
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:24",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "IGE15": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR005",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 345521,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["Ultramarines", null],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Explosive Oil Drum", "Heavy Intercessor"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum:20",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:24",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_ExplOilDrum",
+                "name": "Explosive Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "IGE16": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR002",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 469558,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Jump Pack Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:22",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:28",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc1Inceptor:28",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:24",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "ultraNpc1Inceptor",
+                "name": "Inceptor",
+                "count": 4,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "IGE17": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodSanguinary",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.643
+                }
+            ]
+        },
+        "enemyPower": 1157515,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Heavy Intercessor", "Jump Pack Intercessor", "Nicodemus", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:30",
+                "count": 5
+            },
+            {
+                "id": "bloodNpcSanguinary:17",
+                "count": 1
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:28",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "bloodNpcSanguinary",
+                "name": "Nicodemus",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "IGE18": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR005",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 697195,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc2Terminator:28",
+                "count": 5
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "IGE19": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR035",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 905603,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 3
+            },
+            {
+                "id": "astraNpc1Guardsman:30",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc2Terminator:29",
+                "count": 6
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 3,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 6,
+                "stars": 10,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "IGE20": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR035",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 2509804,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Jump Pack Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 1
+            },
+            {
+                "id": "astraNpc1Guardsman:32",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:33",
+                "count": 5
+            },
+            {
+                "id": "bloodNpc2Terminator:33",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 5,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGE21": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR035",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 2089516,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Heavy Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc2Terminator:33",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:30",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "IGE22": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodTerminator",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.643
+                }
+            ]
+        },
+        "enemyPower": 3199224,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cezare", "Jump Pack Intercessor", "Oil Drum", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:24",
+                "count": 2
+            },
+            {
+                "id": "bloodNpc1Intercessor:33",
+                "count": 4
+            },
+            {
+                "id": "bloodNpc2Terminator:33",
+                "count": 5
+            },
+            {
+                "id": "bloodNpcTerminator:18",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 6,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 5,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "bloodNpcTerminator",
+                "name": "Cezare",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGE23": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL115",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 958810,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:34",
+                "count": 2
+            },
+            {
+                "id": "astraNpc2Lascannon:34",
+                "count": 4
+            },
+            {
+                "id": "astraNpc3Voxcaster:34",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGE24": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_bloodMephiston",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.643
+                }
+            ]
+        },
+        "enemyPower": 889298,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Mortar Team"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman:34",
+                "count": 4
+            },
+            {
+                "id": "astraNpc2Lascannon:34",
+                "count": 5
+            },
+            {
+                "id": "astraNpc4Mortar:34",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 5,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGE25": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_bloodIntercessor",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.267
+                }
+            ]
+        },
+        "enemyPower": 4085604,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["Ultramarines", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:30",
+                "count": 2
+            },
+            {
+                "id": "ultraNpc2Eliminator:37",
+                "count": 4
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor:34",
+                "count": 4
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "ultraNpc4HeavyIntercessor",
+                "name": "Heavy Intercessor",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "IGEC25B": {
+        "campaign": "Blood Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgL204",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 5323176,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cezare", "Dante", "Lucien", "Mataneo", "Mephiston", "Nicodemus", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:31",
+                "count": 6
+            },
+            {
+                "id": "bloodNpcDante:20",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcDeathCompany:19",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcIntercessor:19",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcMephiston:20",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcSanguinary:19",
+                "count": 1
+            },
+            {
+                "id": "bloodNpcTerminator:19",
+                "count": 1
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 6,
+                "stars": 9,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "bloodNpcDante",
+                "name": "Dante",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpcDeathCompany",
+                "name": "Lucien",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpcIntercessor",
+                "name": "Mataneo",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpcMephiston",
+                "name": "Mephiston",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpcSanguinary",
+                "name": "Nicodemus",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpcTerminator",
+                "name": "Cezare",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "IGE26": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_bloodDeathCompany",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.267
+                }
+            ]
+        },
+        "enemyPower": 1697716,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Death Rider", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:30",
+                "count": 2
+            },
+            {
+                "id": "astraNpc5DeathRider:37",
+                "count": 8
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 8,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "IGE27": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_bloodSanguinary",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.267
+                }
+            ]
+        },
+        "enemyPower": 2957483,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-caster", "Death Rider", "Jump Pack Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:30",
+                "count": 1
+            },
+            {
+                "id": "astraNpc3Voxcaster:38",
+                "count": 2
+            },
+            {
+                "id": "astraNpc4Mortar:38",
+                "count": 3
+            },
+            {
+                "id": "astraNpc5DeathRider:38",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc1Intercessor:38",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "IGE28": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_bloodTerminator",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.267
+                }
+            ]
+        },
+        "enemyPower": 2892684,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", null],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Mortar Team", "Death Rider", "Jump Pack Intercessor", "Oil Drum"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:30",
+                "count": 2
+            },
+            {
+                "id": "astraNpc4Mortar:38",
+                "count": 4
+            },
+            {
+                "id": "astraNpc5DeathRider:39",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc1Intercessor:39",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "IGE29": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_bloodMephiston",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.267
+                }
+            ]
+        },
+        "enemyPower": 4381920,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "BloodAngels", "Ultramarines"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Death Rider", "Eliminator", "Terminator"],
+        "rawEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon:39",
+                "count": 3
+            },
+            {
+                "id": "astraNpc5DeathRider:39",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc2Terminator:37",
+                "count": 3
+            },
+            {
+                "id": "ultraNpc2Eliminator:39",
+                "count": 3
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc5DeathRider",
+                "name": "Death Rider",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "IGE30": {
+        "campaign": "Blood Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["orksNob", "orksRuntherd", "orksWeirdboy"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpM003",
+                    "chance_numerator": 3,
+                    "chance_denominator": 25,
+                    "effective_rate": 0.154
+                }
+            ]
+        },
+        "enemyPower": 5645259,
+        "enemiesAlliances": ["Imperial", null],
+        "enemiesFactions": ["AdeptusAstartes", "AstraMilitarum", "BloodAngels", "Ultramarines", null],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Eliminator", "Jump Pack Intercessor", "Nubari", "Oil Drum", "Terminator", "Yarrick"],
+        "rawEnemyTypes": [
+            {
+                "id": "Debris_OilDrum:30",
+                "count": 1
+            },
+            {
+                "id": "astarNpcEradiccator:20",
+                "count": 1
+            },
+            {
+                "id": "astraNpcYarrick:20",
+                "count": 1
+            },
+            {
+                "id": "bloodNpc1Intercessor:39",
+                "count": 3
+            },
+            {
+                "id": "bloodNpc2Terminator:37",
+                "count": 2
+            },
+            {
+                "id": "ultraNpc2Eliminator:39",
+                "count": 2
+            }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "Debris_OilDrum",
+                "name": "Oil Drum",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "astarNpcEradiccator",
+                "name": "Nubari",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpcYarrick",
+                "name": "Yarrick",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpc1Intercessor",
+                "name": "Jump Pack Intercessor",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "bloodNpc2Terminator",
+                "name": "Terminator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "ultraNpc2Eliminator",
+                "name": "Eliminator",
+                "count": 2,
+                "stars": 13,
+                "rank": "Adamantine 2"
             }
         ]
     }

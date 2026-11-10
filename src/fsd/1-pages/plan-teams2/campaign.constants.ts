@@ -27,6 +27,7 @@ export const campaignStorylineOptions: ICampaignStorylineOption[] = [
     { value: 'tau', label: "T'au Empire" },
     { value: 'sisters', label: 'Adepta Sororitas' },
     { value: 'darkAngels', label: 'Dark Angels' },
+    { value: 'bloodAngels', label: 'Blood Angels' },
 ];
 
 export const campaignStorylineLabel = (value: string): string =>
@@ -50,6 +51,7 @@ const storylineToCampaign: Record<string, Campaign> = {
     tau: Campaign.TAS,
     sisters: Campaign.ASS,
     darkAngels: Campaign.DAS,
+    bloodAngels: Campaign.BAS,
 };
 
 /**

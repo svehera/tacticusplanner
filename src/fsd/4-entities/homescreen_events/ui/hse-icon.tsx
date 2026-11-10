@@ -1,17 +1,19 @@
 import { CalendarDays } from 'lucide-react';
 
-import { getImageUrl } from '@/fsd/5-shared/ui';
+import { getHseGameModeIconUrl } from './hse-icon.utils';
 
-/**
- * eventName -> image path (relative to `src/assets/images`). Every event currently falls back to
- * the placeholder icon below; fill these in per-event as real art gets datamined.
- */
-const HSE_ICON_BY_EVENT_NAME: Partial<Record<string, string>> = {};
-
-export function HseIcon({ eventName, className }: { eventName: string; className?: string }) {
-    const iconPath = HSE_ICON_BY_EVENT_NAME[eventName];
-    if (iconPath) {
-        return <img src={getImageUrl(iconPath)} alt={eventName} className={className} />;
+export function HseIcon({
+    eventName,
+    gameModeIcon,
+    className,
+}: {
+    eventName: string;
+    gameModeIcon?: string;
+    className?: string;
+}) {
+    const url = getHseGameModeIconUrl(gameModeIcon);
+    if (url) {
+        return <img src={url} alt={eventName} className={`${className ?? ''} object-contain`} />;
     }
     return <CalendarDays className={className} />;
 }

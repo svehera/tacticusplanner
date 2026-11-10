@@ -21,9 +21,11 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     machinesOfWarAmmo: { iconKey: 'mowAmmo', label: 'Munitions' },
     xp_battlepass: { iconKey: 'battlepassPoints', label: 'Battlepass Points' },
     xp_seasonal: { iconKey: 'eventPoints', label: 'Event Point' },
+    xp_seasonalCrescendo: { iconKey: 'eventPointsCrescendo', label: 'Event Point (Crescendo)' },
     xp_crusadePoints: { iconKey: 'crusadePoints', label: 'Crusade Points' },
     survivalBoost_stats: { iconKey: 'survivalStatBoost', label: '' },
     ShardsAll: { iconKey: 'shard', label: 'Shards' },
+    ShardsWorldEaters: { iconKey: 'shardsWorldEaters', label: 'World Eaters Shards' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
     expeditionSpeedUp: { iconKey: 'expeditionSpeedUp', label: 'Expedition Speed Up' },
@@ -35,6 +37,20 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
         iconKey: 'seasonalEventOctober2026AvatarFrame',
         label: 'Seasonal Event (October 2026) Avatar Frame',
     },
+    avatarFrame_frameNovember2026: {
+        iconKey: 'seasonalEventNovember2026AvatarFrame',
+        label: 'Seasonal Event (November 2026) Avatar Frame',
+    },
+    playerProfileTheme_november_2026: {
+        iconKey: 'playerProfileThemeNovember2026',
+        label: 'Seasonal Event (November 2026) Profile Theme',
+    },
+    playerProfileTheme_december_2026: {
+        iconKey: 'playerProfileThemeDecember2026',
+        label: 'Seasonal Event (December 2026) Profile Theme',
+    },
+    machinesOfWarTokens: { iconKey: 'draftMachinesOfWarComponents', label: 'MoW Components' },
+    draft_offerDKoK_mix_large: { iconKey: 'draftOfferDkokMixLarge', label: 'Mixed Resources (Pick One)' },
     playerProfileTheme_may_2026: {
         iconKey: 'playerProfileThemeMay2026',
         label: 'Seasonal Event (May 2026) Profile Theme',

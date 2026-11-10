@@ -1,6 +1,9 @@
 {
     "event": "June2026",
-    "title": "Armageddon Shop",
+    "title": "Armageddon",
+    "shopTabTitle": "Armageddon Shop",
+    "theme": "june_2026",
+    "interstitial": "ui_interstitial_june_2026.png",
     "weeks": [
         {
             "week": 1,
@@ -2470,6 +2473,91 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 990,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "hse_11th_edition_week1",
+                        "label": "The Outer Walls",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 35,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 35,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nThe Outer Walls: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>35</b>\nglobal_hse_11th_edition_orks: <b>35</b>\n<b>Total: 990</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week1",
+                        "label": "The Outer Walls",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  The Outer Walls: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         },
         {
@@ -6580,6 +6668,103 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 1040,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "amount": 40,
+                        "kind": "quest"
+                    },
+                    {
+                        "id": "hse_11th_edition_week2",
+                        "label": "The Inner Hab District",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 40,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 40,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nSync PvP: <b>40</b>\nThe Inner Hab District: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>40</b>\nglobal_hse_11th_edition_orks: <b>40</b>\n<b>Total: 1,040</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "payouts": 0,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week2",
+                        "label": "The Inner Hab District",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  Sync PvP: 0 × 10 = <b>0</b>\n  The Inner Hab District: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         },
         {
@@ -10729,7 +10914,597 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 1020,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "hse_11th_edition_week3",
+                        "label": "The Inner Spire",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nThe Inner Spire: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>50</b>\nglobal_hse_11th_edition_orks: <b>50</b>\n<b>Total: 1,020</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week3",
+                        "label": "The Inner Spire",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  The Inner Spire: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         }
-    ]
+    ],
+    "offers": {
+        "offer_seasonal_event_june_2026_pass": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_pass",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 17000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_pass"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                "price": 999,
+                "mercadoId": "offer_00999",
+                "rewards": ["seasonalEventCurrencyJune2026:200", "seasonalEcBonus:10", "seasonalPremium:1", "gems:1000"]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_mythic": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_mythic",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_mythic"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsMythic:1",
+                    "xpMythic:3"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_legendary": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_legendary",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_legendary"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsLegendary:2",
+                    "xpMythic:3",
+                    "xpLegendary:2"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_epic": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_epic",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_epic"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsEpic_I_Crit:2",
+                    "itemsEpic_I_Block:2",
+                    "itemsLegendary_I_Booster_Crit:2",
+                    "xpLegendary:11"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_fallback": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_fallback",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_fallback"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:2000",
+                    "xpLegendary:10",
+                    "xpEpic:25",
+                    "itemsRare:3",
+                    "itemsUncommon:3",
+                    "itemsCommon:3"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbMythic_Xenos:4",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbLegendary_Xenos:10",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbEpic_Xenos:16",
+                    "heroAscensionOrbRare_Xenos:16",
+                    "heroAscensionOrbUncommon_Xenos:16",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbMythic_Imperial:4",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbLegendary_Imperial:10",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbEpic_Imperial:16",
+                    "heroAscensionOrbRare_Imperial:16",
+                    "heroAscensionOrbUncommon_Imperial:16",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbMythic_Imperial:2",
+                    "heroAscensionOrbMythic_Xenos:2"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbLegendary_Imperial:5",
+                    "heroAscensionOrbLegendary_Xenos:5"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbEpic_Imperial:8",
+                    "heroAscensionOrbEpic_Xenos:8",
+                    "heroAscensionOrbRare_Imperial:8",
+                    "heroAscensionOrbRare_Xenos:8",
+                    "heroAscensionOrbUncommon_Imperial:8",
+                    "heroAscensionOrbUncommon_Xenos:8"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_SHD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_SHD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_SHD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": ["seasonalEventCurrencyJune2026:1500", "gems:2500"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_HD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_HD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_HD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_05999",
+                "price": 5999,
+                "mercadoId": "offer_05999",
+                "rewards": ["seasonalEventCurrencyJune2026:900", "gems:1500"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_MD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_MD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_MD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_03999_b",
+                "price": 3999,
+                "mercadoId": "offer_03999_b",
+                "rewards": ["seasonalEventCurrencyJune2026:600", "gems:1000"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_LD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_LD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_LD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                "price": 1999,
+                "mercadoId": "offer_01999",
+                "rewards": ["seasonalEventCurrencyJune2026:300", "gems:500"]
+            }
+        }
+    }
 }

@@ -5,6 +5,9 @@ const SURVIVAL_EVENT_ORDER: readonly string[] = [
     'season_may_2026_event',
     'season_september_2026_event',
     'season_crescendo_01_event',
+    'season_crescendo_a_event',
+    'season_crescendo_b_event',
+    'season_december_2026_event',
 ];
 
 export function getSurvivalEventRank(event: ISurvivalEvent): number {

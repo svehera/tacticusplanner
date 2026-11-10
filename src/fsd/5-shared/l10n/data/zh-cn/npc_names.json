@@ -695,6 +695,18 @@
         "name": "",
         "title": ""
     },
+    "astraBossDreir": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossDreirLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "blackBossTerminator": {
         "extraShortName": "",
         "shortName": "",
@@ -947,7 +959,7 @@
         "name": "",
         "title": ""
     },
-    "templBossSwordBrother_LHE": {
+    "templBossSwordBrotherLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -977,7 +989,7 @@
         "name": "",
         "title": ""
     },
-    "templBossAggressor_LHE": {
+    "templBossAggressorLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1001,7 +1013,7 @@
         "name": "",
         "title": ""
     },
-    "templBossAncient_LHE": {
+    "templBossAncientLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1031,7 +1043,7 @@
         "name": "",
         "title": ""
     },
-    "templBossChampion_LHE": {
+    "templBossChampionLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1055,7 +1067,7 @@
         "name": "",
         "title": ""
     },
-    "templBossHelbrecht_LHE": {
+    "templBossHelbrechtLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1133,6 +1145,12 @@
         "name": "",
         "title": ""
     },
+    "orksBossRuntherdSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "orksNpcRuntherd": {
         "extraShortName": "",
         "shortName": "",
@@ -1182,6 +1200,12 @@
         "title": ""
     },
     "orksNpcWarbossSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossWeirdboySurv": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1325,6 +1349,12 @@
         "name": "",
         "title": ""
     },
+    "eldarBossLhykhisSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "worldNpc1Berzerker": {
         "extraShortName": "",
         "shortName": "狂战士",
@@ -1337,7 +1367,19 @@
         "name": "",
         "title": ""
     },
+    "worldBossTerminatorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "worldBossJakhalLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossJakhalSurv": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1355,13 +1397,31 @@
         "name": "",
         "title": ""
     },
+    "worldBossEightboundSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "worldBossExecutionsLHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
         "title": ""
     },
+    "worldBossExecutionsSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "worldBossKharnLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossKharnSurv": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1733,6 +1793,36 @@
         "name": "经验巨著",
         "title": ""
     },
+    "Debris_AmmoBox": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "Debris_OilDrum": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "Debris_ExplOilDrum": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "Debris_Strongbox": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "Debris_Crate_Imp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "powupArmor": {
         "extraShortName": "",
         "shortName": "护甲强化包",
@@ -1875,6 +1965,24 @@
         "extraShortName": "",
         "shortName": "圣甲虫群强化包",
         "name": "圣甲虫群强化包",
+        "title": ""
+    },
+    "powupSummonSpawn_admecSmnVanguard": {
+        "extraShortName": "",
+        "shortName": "护教军先锋强化包",
+        "name": "护教军先锋强化包",
+        "title": ""
+    },
+    "powupSummonSpawn_admecSmnTechpriest": {
+        "extraShortName": "",
+        "shortName": "技术祭司科技教士强化包",
+        "name": "技术祭司科技教士强化包",
+        "title": ""
+    },
+    "powupSummonSpawn_admecSmnElectropriest": {
+        "extraShortName": "",
+        "shortName": "驭电祭司强化包",
+        "name": "驭电祭司强化包",
         "title": ""
     },
     "powupBomb": {
@@ -2033,19 +2141,19 @@
         "name": "",
         "title": ""
     },
-    "astarCyrus_LHE": {
+    "orksWeirdboy_LHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
         "title": ""
     },
-    "thousSekhetar_LHE": {
+    "tyranParasite_LHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
         "title": ""
     },
-    "darkaSternguard_LHE": {
+    "lostaFearmonger_LHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -2255,6 +2363,18 @@
         "name": "",
         "title": ""
     },
+    "thousBossAhrimanSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossSekhetarSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "thousNpcTzaangor": {
         "extraShortName": "",
         "shortName": "",
@@ -2406,6 +2526,12 @@
         "title": ""
     },
     "tyranBossTyrantGuardLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossTyrantGuardSurv": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -2777,6 +2903,42 @@
         "name": "",
         "title": ""
     },
+    "bloodNpcIntercessor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpcDeathCompany": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpcSanguinary": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpcMephiston": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpcDante": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpcTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "bloodNpc1Intercessor": {
         "extraShortName": "",
         "shortName": "跳跃背包仲裁者",
@@ -2787,6 +2949,12 @@
         "extraShortName": "",
         "shortName": "",
         "name": "",
+        "title": ""
+    },
+    "bloodNpc2Terminator": {
+        "extraShortName": "",
+        "shortName": "终结者",
+        "name": "终结者",
         "title": ""
     },
     "ultraNpcMoWDreadnought": {
@@ -3179,6 +3347,54 @@
         "name": "铁裔重装战士",
         "title": ""
     },
+    "custoNpc1Sentinel": {
+        "extraShortName": "",
+        "shortName": "哨兵守卫",
+        "name": "哨兵守卫",
+        "title": ""
+    },
+    "custoNpc2Dreadnought": {
+        "extraShortName": "",
+        "shortName": "布狄卡里",
+        "name": "布狄卡里",
+        "title": ""
+    },
+    "custoNpcMoWDreadnought": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "custoNpcVexilusPraetor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "custoNpcAtlacoya": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "custoNpcKyrus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "custoNpcBladeChampion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "custoNpcTrajann": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "astarBossCyrusSurv": {
         "extraShortName": "",
         "shortName": "",
@@ -3228,6 +3444,12 @@
         "title": ""
     },
     "spaceBossBlackmaneSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astarNpcEradiccator": {
         "extraShortName": "",
         "shortName": "",
         "name": "",

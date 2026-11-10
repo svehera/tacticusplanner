@@ -15,8 +15,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyJune2026',
         startUtc: Date.UTC(2026, 5, 22),
         earningsInfographic: [
-            { label: 'F2P per week', amount: 'ca. 1,000' },
-            { label: 'Bonus shipment', amount: 'ca. +900 per week' },
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 1,000' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +900 per week' },
         ],
     },
     August2026: {
@@ -25,8 +25,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyAugust2026',
         startUtc: Date.UTC(2026, 7, 5),
         earningsInfographic: [
-            { label: 'F2P per week', amount: 'ca. 750' },
-            { label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 750' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
         ],
     },
     October2026: {
@@ -35,9 +35,19 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyOctober2026',
         startUtc: Date.UTC(2026, 9, 26),
     },
+    November2026: {
+        id: 'november2026',
+        displayName: 'Skull Harvest',
+        currencyType: 'seasonalEventCurrencyNovember2026',
+        startUtc: Date.UTC(2026, 10, 23),
+        earningsInfographic: [
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 850' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +1,100' },
+        ],
+    },
 };
 
-// Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon-shop.json`),
+// Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon.json`),
 // which keeps this glob from picking up the other shop data files living in the same directory
 // (`new-guild-shop.json`, `new-war-shop.json`, `new-rogue-trader.json`, `new-crusade-shop-data.json`).
 const modules = import.meta.glob<{ default: SeasonalEventRaw }>('./[0-9][0-9][0-9][0-9]-*.json', { eager: true });

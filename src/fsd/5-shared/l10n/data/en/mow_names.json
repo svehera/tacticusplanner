@@ -64,5 +64,11 @@
         "shortName": "Biovore",
         "name": "Biovore",
         "title": "Artillery Organism"
+    },
+    "custoDreadnought": {
+        "extraShortName": "Boudicari",
+        "shortName": "Boudicari",
+        "name": "Boudicari Feldorus",
+        "title": "Contemptor-Achillus Dreadnought"
     }
 }

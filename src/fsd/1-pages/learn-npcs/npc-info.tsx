@@ -3,9 +3,24 @@ import React, { useMemo, useState } from 'react';
 
 import { filterMap } from '@/fsd/5-shared/lib';
 import { FactionId } from '@/fsd/5-shared/model';
+import { Card, CardContent } from '@/fsd/5-shared/ui';
 
-import { FactionSelect } from '@/fsd/4-entities/faction';
-import { INpcData, NpcSelect, NpcService, NpcStats, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
+import { FactionImage } from '@/fsd/4-entities/faction';
+import {
+    INpcData,
+    NpcAbilities,
+    NpcLevelSlider,
+    NpcRoundPortrait,
+    NpcSelect,
+    NpcService,
+    NpcStats,
+} from '@/fsd/4-entities/npc';
+
+import { NpcFactionPicker } from './npc-faction-picker';
+
+const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <h3 className="mb-2 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">{children}</h3>
+);
 
 export const NpcInfo: React.FC = () => {
     const [faction, setFaction] = useState<FactionId>('Necrons');
@@ -34,37 +49,43 @@ export const NpcInfo: React.FC = () => {
     const currentStats = npc.stats[progressionIndex];
 
     return (
-        <div className="mx-auto w-full max-w-4xl p-4">
-            {/* Main Card Container */}
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-slate-700 dark:bg-[#1a2234]">
-                {/* Header / Controls Section */}
-                <div className="border-b border-gray-200 bg-gray-50 p-5 dark:border-slate-700 dark:bg-[#1e293b]">
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div className="flex flex-col">
-                            <FactionSelect
-                                label={'Faction'}
-                                factions={factions}
-                                faction={faction}
-                                factionChanges={onFactionChange}
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <NpcSelect label={'NPC'} npcs={npcs} npc={npc} npcChanges={onNpcChange} />
-                        </div>
-                        <div className="flex flex-col">
-                            <ProgressionIndexSelect
-                                label={'NPC Level'}
-                                npc={npc}
-                                index={progressionIndex}
-                                indexChanges={setProgressionIndex}
-                            />
+        <div className="space-y-6 py-6">
+            <div>
+                <h2>NPCs</h2>
+                <p className="text-sm text-(--soft-fg)">Browse enemy stats, attacks and traits at every level.</p>
+            </div>
+
+            <Card>
+                <CardContent className="space-y-5 p-5">
+                    <section>
+                        <SectionLabel>Faction</SectionLabel>
+                        <NpcFactionPicker factions={factions} faction={faction} factionChanges={onFactionChange} />
+                    </section>
+                    <section>
+                        <SectionLabel>NPC</SectionLabel>
+                        <NpcSelect npcs={npcs} npc={npc} npcChanges={onNpcChange} />
+                    </section>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardContent className="space-y-6 p-5">
+                    <div className="flex items-center gap-4">
+                        <NpcRoundPortrait npc={npc} className="size-20 ring-2 ring-(--primary)" />
+                        <div>
+                            <div className="text-xl font-semibold">{npc.name}</div>
+                            <div className="mt-1 flex items-center gap-2 text-sm text-(--soft-fg)">
+                                {npc.faction && <FactionImage faction={npc.faction} />}
+                                <span>{npc.faction}</span>
+                                {npc.alliance && <span>&bull; {npc.alliance}</span>}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <NpcStats npc={npc} currentStats={currentStats} />
-            </div>
+                    <NpcLevelSlider npc={npc} index={progressionIndex} indexChanges={setProgressionIndex} />
+                    <NpcStats npc={npc} currentStats={currentStats} />
+                    <NpcAbilities npc={npc} currentStats={currentStats} />
+                </CardContent>
+            </Card>
         </div>
     );
 };

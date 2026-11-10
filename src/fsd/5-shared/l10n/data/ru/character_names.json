@@ -707,6 +707,12 @@
         "name": "Нубари Шал'Дар",
         "title": "Сержант искоренителей"
     },
+    "lostaFearmonger": {
+        "extraShortName": "Дарас",
+        "shortName": "Дарас",
+        "name": "Дарас Кэрроу",
+        "title": "Страховещатель из Когтя Немезиды"
+    },
     "lostaBile": {
         "extraShortName": "Фабий Байл",
         "shortName": "Фабий Байл",

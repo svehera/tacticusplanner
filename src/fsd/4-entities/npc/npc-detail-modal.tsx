@@ -1,6 +1,7 @@
 import { PortalDialog } from '@/fsd/5-shared/ui';
 
 import { INpcData, INpcStats } from './model';
+import { NpcAbilities } from './npc-abilities';
 import { NpcStats } from './npc-stats';
 
 interface Props {
@@ -24,7 +25,10 @@ export const NpcDetailModal: React.FC<Props> = ({ isOpen, onClose, npc, stats }:
                 </div>
             </PortalDialog.Header>
             <PortalDialog.Body className="pb-6">
-                <NpcStats npc={npc} currentStats={stats} />
+                <div className="space-y-6 p-6">
+                    <NpcStats npc={npc} currentStats={stats} />
+                    <NpcAbilities npc={npc} currentStats={stats} gridClassName="grid-cols-1" />
+                </div>
             </PortalDialog.Body>
         </PortalDialog>
     );

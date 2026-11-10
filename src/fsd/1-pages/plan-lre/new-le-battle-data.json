@@ -30740,7 +30740,7 @@
                     {
                         "mapId": "LE3_14",
                         "number": 12,
-                        "power": 1014995,
+                        "power": 1005857,
                         "tier": 1,
                         "disallowedFactions": [
                             "Orks",
@@ -30846,7 +30846,7 @@
                                     "orksNpc1Grot:36",
                                     "orksNpc1Grot:36"
                                 ],
-                                "power": 178301,
+                                "power": 169163,
                                 "round": 8
                             }
                         ],
@@ -41488,7 +41488,7 @@
                     {
                         "mapId": "LE1_12",
                         "number": 14,
-                        "power": 2546540,
+                        "power": 2503866,
                         "tier": 1,
                         "disallowedFactions": [
                             "Necrons",
@@ -41539,7 +41539,7 @@
                                     "orksNpc1Grot:40",
                                     "orksNpc1Grot:40"
                                 ],
-                                "power": 686332,
+                                "power": 643658,
                                 "round": 4
                             },
                             {

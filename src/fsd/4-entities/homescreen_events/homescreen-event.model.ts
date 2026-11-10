@@ -70,8 +70,20 @@ export interface HomescreenEventTier {
 /** `default` is used by events that don't split rewards into a high/mid/low power-level tier. */
 export type HomescreenEventTierKey = 'high' | 'mid' | 'low' | 'default';
 
+/** One run of an event, as embedded in the event's JSON. `endUtc` is exclusive. */
+export interface HomescreenEventRun {
+    startDate: string;
+    endDate: string;
+    startUtc: string;
+    endUtc: string;
+}
+
 export interface HomescreenEventData {
     eventName: string;
+    /** Every known run of the event (past, current and upcoming). Absent for events with no known dates. */
+    schedule?: HomescreenEventRun[];
+    /** Game-mode icon file name (in `snowprint_assets/misc`). Absent on older events. */
+    gameModeIcon?: string;
     tiers: Partial<Record<HomescreenEventTierKey, HomescreenEventTier>>;
 }
 

@@ -64,5 +64,11 @@
         "shortName": "孢子兽",
         "name": "孢子兽",
         "title": "火炮有机体"
+    },
+    "custoDreadnought": {
+        "extraShortName": "布狄卡里",
+        "shortName": "布狄卡里",
+        "name": "布狄卡里·费尔多鲁斯",
+        "title": "蔑视者-阿喀琉斯无畏机甲"
     }
 }
