@@ -15,6 +15,7 @@ import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
 import { DailyRaidsSection } from './daily-raids-section';
 import { GoalsSection } from './goals-section';
+import { getCurrentHomeCalendarImage } from './home-calendar';
 import { LreSection } from './lre-section';
 import { dismissHomeQuestionnaire, homeQuestionnaireLink, isHomeQuestionnaireDismissed } from './questionnaire-banner';
 import { useBmcWidget } from './use-bmc-widget';
@@ -38,7 +39,7 @@ export const DesktopHome = () => {
     };
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_143.webp'),
+        current: getImageUrl(getCurrentHomeCalendarImage()),
     };
 
     const announcements = () => {
