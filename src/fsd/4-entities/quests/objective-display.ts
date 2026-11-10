@@ -25,6 +25,7 @@ const TRAIT_ICON_KEY_OVERRIDES: Record<string, string> = {
     MkXGravis: 'traitMkGravis',
     Psyker: 'traitPsychic',
     FinalJustice: 'traitFinalVengeance',
+    WeaverOfFate: 'traitWeaversOfFate',
 };
 
 const lookupName = (names: Record<string, string>, id: string): string => names[id] || id;
