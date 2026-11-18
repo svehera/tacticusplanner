@@ -18,7 +18,7 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
-import { XpUseState } from './models';
+import { computeXpBooksTotals, XpUseState } from './models';
 
 const MYTHIC_UNCRAFTABLE_UPGRADES = [
     {
@@ -133,6 +133,8 @@ export const Resources = () => {
         xpUse.useMythic,
     ];
 
+    const xpTotals = computeXpBooksTotals(inventory.xpBooks, enabled);
+
     const getRarityIndex = (rarity: Rarity): number => rarities.indexOf(rarity);
 
     const newState = (rarity: Rarity): XpUseState => {
@@ -215,6 +217,17 @@ export const Resources = () => {
                                 isEnabled
                             );
                         })}
+                    </div>
+                    <div className="mt-2 border-t border-(--card-border) pt-2 text-sm" title="Selected rarities only">
+                        <div>
+                            Total: <span className="font-semibold">{xpTotals.xp.toLocaleString()} XP</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <MiscIcon icon="mythicBook" width={20} height={20} />
+                            <span className="font-semibold">
+                                {xpTotals.mythicBooks.toLocaleString(undefined, { maximumFractionDigits: 1 })}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
