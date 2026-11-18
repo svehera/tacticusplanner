@@ -66,6 +66,13 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
                 },
             },
             {
+                path: 'privacy',
+                async lazy() {
+                    const { Privacy } = await import('@/fsd/1-pages/privacy');
+                    return { Component: Privacy };
+                },
+            },
+            {
                 path: 'ty',
                 async lazy() {
                     const { Thanks } = await import('@/fsd/3-features/thank-you/thanks');
