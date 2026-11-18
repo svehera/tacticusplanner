@@ -23,6 +23,9 @@ export const Contacts = () => {
                 </a>
             </p>
             <p>
+                <Link to="/privacy">Privacy &amp; cookies</Link>
+            </p>
+            <p>
                 Buy me a trooper{' '}
                 <IconButton component={Link} to={bmcLink} target={'_blank'}>
                     <BmcIcon />

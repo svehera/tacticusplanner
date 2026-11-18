@@ -247,6 +247,17 @@ export const appRoutes: () => RouteObject[] = () => [
                 },
             },
             {
+                path: 'privacy',
+                handle: {
+                    title: 'Privacy & cookies',
+                    description: 'What Tacticus Planner stores about you and how to remove it.',
+                },
+                async lazy() {
+                    const { Privacy } = await import('@/fsd/1-pages/privacy');
+                    return { Component: Privacy };
+                },
+            },
+            {
                 path: 'ty',
                 handle: { title: 'Thank You' },
                 async lazy() {
