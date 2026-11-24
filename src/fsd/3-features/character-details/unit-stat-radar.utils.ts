@@ -29,6 +29,15 @@ export interface RadarAxisResult {
     percentile: number;
 }
 
+export const AXIS_DESCRIPTIONS: Record<RadarAxisId, string> = {
+    health: 'Health',
+    armor: 'Armor',
+    meleeVsInfArmor: 'Melee damage vs infinite armor',
+    meleeVsZeroArmor: 'Melee damage vs 0 armor',
+    rangedVsInfArmor: 'Ranged damage vs infinite armor',
+    rangedVsZeroArmor: 'Ranged damage vs 0 armor',
+};
+
 const AXIS_IDS: RadarAxisId[] = [
     'health',
     'armor',
@@ -53,16 +62,20 @@ const AXIS_IDS: RadarAxisId[] = [
  * (e.g. a melee-only unit's ranged axis) and inflate their percentile. An unrecognized type should
  * contribute nothing to that axis, not a fabricated negative one.
  */
-function computeRawAxisValues(entry: ICharacterCombatProfile): Record<RadarAxisId, number> {
-    const damage = calculateStat(entry.initialStats.damage, REFERENCE_RANK, REFERENCE_RARITY_STARS);
+function computeRawAxisValues(
+    entry: ICharacterCombatProfile,
+    rank: Rank = REFERENCE_RANK,
+    stars: RarityStars = REFERENCE_RARITY_STARS
+): Record<RadarAxisId, number> {
+    const damage = calculateStat(entry.initialStats.damage, rank, stars);
     const meleePierce = Math.max(0, getPierceRatio(entry.meleeAttack.pierce));
     const rangedPierce = entry.rangedAttack ? Math.max(0, getPierceRatio(entry.rangedAttack.pierce)) : 0;
     const meleeHits = entry.meleeAttack.hitCount;
     const rangedHits = entry.rangedAttack?.hitCount ?? 0;
 
     return {
-        health: calculateStat(entry.initialStats.health, REFERENCE_RANK, REFERENCE_RARITY_STARS),
-        armor: calculateStat(entry.initialStats.armor, REFERENCE_RANK, REFERENCE_RARITY_STARS),
+        health: calculateStat(entry.initialStats.health, rank, stars),
+        armor: calculateStat(entry.initialStats.armor, rank, stars),
         meleeVsZeroArmor: damage * meleeHits,
         meleeVsInfArmor: damage * meleeHits * meleePierce,
         rangedVsZeroArmor: damage * rangedHits,
@@ -75,6 +88,20 @@ function computeRawAxisValues(entry: ICharacterCombatProfile): Record<RadarAxisI
 const ALL_CHARACTER_RAW_VALUES: Record<RadarAxisId, number>[] = charactersData2.map(entry =>
     computeRawAxisValues(entry)
 );
+const RANGED_CHARACTER_RAW_VALUES: Record<RadarAxisId, number>[] = charactersData2
+    .filter(entry => entry.rangedAttack)
+    .map(entry => computeRawAxisValues(entry));
+
+const RANGED_AXES: ReadonlySet<RadarAxisId> = new Set(['rangedVsInfArmor', 'rangedVsZeroArmor']);
+
+/**
+ * Ranged axes are ranked only against characters that have a ranged attack. Including melee-only
+ * characters (all 0) would pad the population's bottom and inflate every ranged character's percentile.
+ */
+function populationFor(axis: RadarAxisId): number[] {
+    const source = RANGED_AXES.has(axis) ? RANGED_CHARACTER_RAW_VALUES : ALL_CHARACTER_RAW_VALUES;
+    return source.map(populationEntry => populationEntry[axis]);
+}
 
 /**
  * Fraction of `population` this value strictly exceeds, as a 0-100 percentile.
@@ -103,9 +130,40 @@ export function buildRadarStats(snowprintId: string): RadarAxisResult[] | undefi
     return AXIS_IDS.map(axis => ({
         axis,
         value: raw[axis],
-        percentile: percentileOf(
-            raw[axis],
-            ALL_CHARACTER_RAW_VALUES.map(populationEntry => populationEntry[axis])
-        ),
+        percentile: percentileOf(raw[axis], populationFor(axis)),
     }));
+}
+
+export interface AxisBar {
+    id: string;
+    name: string;
+    value: number;
+}
+
+/**
+ * Every character's raw value on each axis at the given rank/stars (not the fixed reference),
+ * sorted ascending. Ranged axes include only characters that have a ranged attack.
+ */
+export function buildAxisDistributions(rank: Rank, stars: RarityStars): Record<RadarAxisId, AxisBar[]> {
+    const rows = charactersData2.map(entry => ({ entry, raw: computeRawAxisValues(entry, rank, stars) }));
+    const result = {} as Record<RadarAxisId, AxisBar[]>;
+    for (const axis of AXIS_IDS) {
+        result[axis] = rows
+            .filter(({ entry }) => !RANGED_AXES.has(axis) || entry.rangedAttack)
+            .map(({ entry, raw }) => ({ id: entry.id, name: entry.name, value: raw[axis] }))
+            .toSorted((a, b) => a.value - b.value);
+    }
+    return result;
+}
+
+/** Rounds `max` up to a 1/2/5 × 10^n step multiple and returns evenly spaced ticks from 0 to that ceiling. */
+export function niceTicks(max: number, targetCount = 5): number[] {
+    if (max <= 0) return [0];
+    const rawStep = max / targetCount;
+    const magnitude = 10 ** Math.floor(Math.log10(rawStep));
+    const residual = rawStep / magnitude;
+    const step = (residual <= 1 ? 1 : residual <= 2 ? 2 : residual <= 5 ? 5 : 10) * magnitude;
+    const ticks: number[] = [];
+    for (let tick = 0; tick < max + step; tick += step) ticks.push(tick);
+    return ticks;
 }

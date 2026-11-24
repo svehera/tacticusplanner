@@ -580,7 +580,7 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                         />
                         <div className="flex w-full basis-full flex-col items-center gap-1 lg:max-w-[320px] lg:min-w-64 lg:flex-1 lg:basis-auto">
                             <span className="self-start text-xs text-(--soft-fg)">Stat percentiles</span>
-                            <UnitStatRadarChart snowprintId={char.snowprintId} />
+                            <UnitStatRadarChart snowprintId={char.snowprintId} rank={rank} stars={stars} />
                         </div>
                     </>
                 )}

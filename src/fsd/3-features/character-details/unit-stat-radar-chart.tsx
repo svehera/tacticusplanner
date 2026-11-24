@@ -1,11 +1,13 @@
 import { Copy } from 'lucide-react';
 import { enqueueSnackbar } from 'notistack';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
+import { Rank, RarityStars } from '@/fsd/5-shared/model';
 import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
-import { buildRadarStats, RadarAxisId } from './unit-stat-radar.utils';
+import { UnitStatBarChartsModal } from './unit-stat-bar-charts-modal';
+import { AXIS_DESCRIPTIONS, buildRadarStats, RadarAxisId } from './unit-stat-radar.utils';
 
 /** CSS custom properties the chart's inline styles reference — resolved to concrete values before
  *  copying, since `var(--token)` only means anything inside this page's own cascade. */
@@ -25,34 +27,34 @@ interface AxisSpec {
 
 /** N/NE/SE/S/SW/NW, 60deg apart — a pointy-top hexagon, matching the requested axis layout. */
 const AXES: AxisSpec[] = [
-    { id: 'health', icon: 'health', description: 'Health', angleDeg: 0 },
-    { id: 'armor', icon: 'armour', description: 'Armor', angleDeg: 60 },
+    { id: 'health', icon: 'health', description: AXIS_DESCRIPTIONS.health, angleDeg: 0 },
+    { id: 'armor', icon: 'armour', description: AXIS_DESCRIPTIONS.armor, angleDeg: 60 },
     {
         id: 'meleeVsInfArmor',
         icon: 'statMeleeAttack',
         symbol: '∞',
-        description: 'Melee damage vs infinite armor',
+        description: AXIS_DESCRIPTIONS.meleeVsInfArmor,
         angleDeg: 120,
     },
     {
         id: 'meleeVsZeroArmor',
         icon: 'statMeleeAttack',
         symbol: '0',
-        description: 'Melee damage vs 0 armor',
+        description: AXIS_DESCRIPTIONS.meleeVsZeroArmor,
         angleDeg: 180,
     },
     {
         id: 'rangedVsInfArmor',
         icon: 'statRangedAttack',
         symbol: '∞',
-        description: 'Ranged damage vs infinite armor',
+        description: AXIS_DESCRIPTIONS.rangedVsInfArmor,
         angleDeg: 240,
     },
     {
         id: 'rangedVsZeroArmor',
         icon: 'statRangedAttack',
         symbol: '0',
-        description: 'Ranged damage vs 0 armor',
+        description: AXIS_DESCRIPTIONS.rangedVsZeroArmor,
         angleDeg: 300,
     },
 ];
@@ -116,6 +118,9 @@ function axisLabelLayout(axis: AxisSpec, x: number, y: number) {
 interface Props {
     /** The character's snowprintId. Nothing renders if it doesn't resolve to a known character. */
     snowprintId: string;
+    /** The unit's current rank/stars, used for the click-through bar charts' comparison population. */
+    rank: Rank;
+    stars: RarityStars;
 }
 
 /**
@@ -151,8 +156,9 @@ async function copySvgMarkup(svg: SVGSVGElement | null): Promise<boolean> {
  * Health/Armor/Melee/Ranged damage (each damage axis split into vs-0-armor and vs-infinite-armor).
  * See {@link buildRadarStats} for how the percentiles are computed.
  */
-export const UnitStatRadarChart = ({ snowprintId }: Props) => {
+export const UnitStatRadarChart = ({ snowprintId, rank, stars }: Props) => {
     const svgReference = useRef<SVGSVGElement>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const stats = buildRadarStats(snowprintId);
     if (!stats) return;
@@ -182,110 +188,129 @@ export const UnitStatRadarChart = ({ snowprintId }: Props) => {
                     className="absolute top-0 right-0 z-10 cursor-pointer rounded-md border border-(--border) p-1 text-(--soft-fg) transition-colors hover:border-(--primary)/50 hover:bg-(--primary)/10 hover:text-(--primary)">
                     <Copy className="size-3.5" />
                 </button>
-                <svg
-                    ref={svgReference}
-                    viewBox={`0 0 ${SIZE} ${SIZE}`}
-                    width={SIZE}
-                    height={SIZE}
-                    className="h-auto w-full"
-                    role="img"
-                    aria-label="Stat percentiles">
-                    {GRID_LEVELS.map(level => (
+                <button
+                    type="button"
+                    title="Compare every character, per stat"
+                    aria-label="Compare every character, per stat"
+                    onClick={() => setIsModalOpen(true)}
+                    className="block w-full cursor-pointer">
+                    <svg
+                        ref={svgReference}
+                        viewBox={`0 0 ${SIZE} ${SIZE}`}
+                        width={SIZE}
+                        height={SIZE}
+                        className="h-auto w-full"
+                        role="img"
+                        aria-label="Stat percentiles">
+                        {GRID_LEVELS.map(level => (
+                            <polygon
+                                key={level}
+                                points={polygonPoints(level)}
+                                vectorEffect="non-scaling-stroke"
+                                style={{
+                                    fill: 'none',
+                                    stroke: 'var(--fg-muted)',
+                                    strokeWidth: 1.5,
+                                    strokeDasharray: level === 1 ? undefined : '4 3',
+                                }}
+                            />
+                        ))}
+
+                        {AXES.map(axis => {
+                            const { x, y } = toPoint(axis.angleDeg, 1);
+                            return (
+                                <line
+                                    key={axis.id}
+                                    x1={CENTER}
+                                    y1={CENTER}
+                                    x2={x}
+                                    y2={y}
+                                    vectorEffect="non-scaling-stroke"
+                                    style={{ stroke: 'var(--fg-muted)', strokeWidth: 1.5 }}
+                                />
+                            );
+                        })}
+
+                        {/* Scale reference on the north axis only — one axis is enough to read percentages off the rings. */}
+                        {GRID_LEVELS.map(level => {
+                            const { x, y } = toPoint(0, level);
+                            return (
+                                <text
+                                    key={level}
+                                    x={x + TICK_LABEL_OFFSET_X}
+                                    y={y}
+                                    textAnchor="start"
+                                    dominantBaseline="middle"
+                                    style={{ fill: 'var(--fg-muted)', fontSize: 9 }}>
+                                    {level * 100}
+                                </text>
+                            );
+                        })}
+
                         <polygon
-                            key={level}
-                            points={polygonPoints(level)}
-                            vectorEffect="non-scaling-stroke"
+                            points={dataPoints.map(({ point }) => `${point.x},${point.y}`).join(' ')}
                             style={{
-                                fill: 'none',
-                                stroke: 'var(--fg-muted)',
-                                strokeWidth: 1.5,
-                                strokeDasharray: level === 1 ? undefined : '4 3',
+                                fill: 'var(--primary)',
+                                fillOpacity: 0.25,
+                                stroke: 'var(--primary)',
+                                strokeWidth: 2,
                             }}
                         />
-                    ))}
 
-                    {AXES.map(axis => {
-                        const { x, y } = toPoint(axis.angleDeg, 1);
-                        return (
-                            <line
+                        {dataPoints.map(({ axis, stat, point }) => (
+                            <AccessibleTooltip
                                 key={axis.id}
-                                x1={CENTER}
-                                y1={CENTER}
-                                x2={x}
-                                y2={y}
-                                vectorEffect="non-scaling-stroke"
-                                style={{ stroke: 'var(--fg-muted)', strokeWidth: 1.5 }}
-                            />
-                        );
-                    })}
-
-                    {/* Scale reference on the north axis only — one axis is enough to read percentages off the rings. */}
-                    {GRID_LEVELS.map(level => {
-                        const { x, y } = toPoint(0, level);
-                        return (
-                            <text
-                                key={level}
-                                x={x + TICK_LABEL_OFFSET_X}
-                                y={y}
-                                textAnchor="start"
-                                dominantBaseline="middle"
-                                style={{ fill: 'var(--fg-muted)', fontSize: 9 }}>
-                                {level * 100}
-                            </text>
-                        );
-                    })}
-
-                    <polygon
-                        points={dataPoints.map(({ point }) => `${point.x},${point.y}`).join(' ')}
-                        style={{ fill: 'var(--primary)', fillOpacity: 0.25, stroke: 'var(--primary)', strokeWidth: 2 }}
-                    />
-
-                    {dataPoints.map(({ axis, stat, point }) => (
-                        <AccessibleTooltip
-                            key={axis.id}
-                            title={
-                                stat
-                                    ? `${axis.description}: ${Math.round(stat.percentile)}th percentile (${stat.value.toLocaleString()})`
-                                    : axis.description
-                            }>
-                            <circle
-                                cx={point.x}
-                                cy={point.y}
-                                r={4}
-                                style={{ fill: 'var(--primary)', stroke: 'var(--overlay)', strokeWidth: 1.5 }}
-                            />
-                        </AccessibleTooltip>
-                    ))}
-
-                    {AXES.map(axis => {
-                        const { x, y } = toPoint(axis.angleDeg, 1, LABEL_RADIUS);
-                        const { iconX, iconY, symbolX, symbolY } = axisLabelLayout(axis, x, y);
-                        const icon = tacticusIcons[axis.icon];
-                        return (
-                            <g key={axis.id}>
-                                <image
-                                    href={icon.file}
-                                    x={iconX}
-                                    y={iconY}
-                                    width={LABEL_ICON_SIZE}
-                                    height={LABEL_ICON_SIZE}
-                                    aria-label={icon.label}
+                                title={
+                                    stat
+                                        ? `${axis.description}: ${Math.round(stat.percentile)}th percentile (${stat.value.toLocaleString()})`
+                                        : axis.description
+                                }>
+                                <circle
+                                    cx={point.x}
+                                    cy={point.y}
+                                    r={4}
+                                    style={{ fill: 'var(--primary)', stroke: 'var(--overlay)', strokeWidth: 1.5 }}
                                 />
-                                {axis.symbol && (
-                                    <text
-                                        x={symbolX}
-                                        y={symbolY}
-                                        textAnchor="start"
-                                        dominantBaseline="middle"
-                                        style={{ fill: 'var(--soft-fg)', fontSize: 11 }}>
-                                        {axis.symbol}
-                                    </text>
-                                )}
-                            </g>
-                        );
-                    })}
-                </svg>
+                            </AccessibleTooltip>
+                        ))}
+
+                        {AXES.map(axis => {
+                            const { x, y } = toPoint(axis.angleDeg, 1, LABEL_RADIUS);
+                            const { iconX, iconY, symbolX, symbolY } = axisLabelLayout(axis, x, y);
+                            const icon = tacticusIcons[axis.icon];
+                            return (
+                                <g key={axis.id}>
+                                    <image
+                                        href={icon.file}
+                                        x={iconX}
+                                        y={iconY}
+                                        width={LABEL_ICON_SIZE}
+                                        height={LABEL_ICON_SIZE}
+                                        aria-label={icon.label}
+                                    />
+                                    {axis.symbol && (
+                                        <text
+                                            x={symbolX}
+                                            y={symbolY}
+                                            textAnchor="start"
+                                            dominantBaseline="middle"
+                                            style={{ fill: 'var(--soft-fg)', fontSize: 11 }}>
+                                            {axis.symbol}
+                                        </text>
+                                    )}
+                                </g>
+                            );
+                        })}
+                    </svg>
+                </button>
             </div>
+            <UnitStatBarChartsModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                snowprintId={snowprintId}
+                rank={rank}
+                stars={stars}
+            />
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-(--soft-fg)">
                 {stats.map(stat => {

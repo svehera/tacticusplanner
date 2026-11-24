@@ -133,4 +133,10 @@ describe('buildRadarStats', () => {
             }
         }
     });
+
+    it('ranks ranged axes only against characters with a ranged attack (Daras is near the bottom)', () => {
+        const daras = buildRadarStats('lostaFearmonger')!;
+        const inf = daras.find(stat => stat.axis === 'rangedVsInfArmor')!;
+        expect(inf.percentile).toBeLessThan(10);
+    });
 });
